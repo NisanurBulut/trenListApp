@@ -15,6 +15,7 @@ export class HomePage {
   
     constructor(public navCtrl: NavController, public authService:AuthServiceProvider,public app: App) {
     const data = JSON.parse(localStorage.getItem('userData'));
+    console.log(data);
     this.userDetails = data.userData;
   console.log(data.userData);
   //this.userPostData.user_id = this.userDetails.user_id;

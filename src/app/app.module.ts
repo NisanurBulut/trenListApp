@@ -5,7 +5,6 @@ import { MyApp } from './app.component';
 
 import {LoginPage} from '../pages/login/login';
 import {SignupPage} from '../pages/signup/signup';
-import {WelcomePage} from '../pages/welcome/welcome';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -21,7 +20,6 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     LoginPage,
     SignupPage,
-    WelcomePage,
     AboutPage,
     ContactPage,
     HomePage,
@@ -38,7 +36,6 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     LoginPage,
     SignupPage,
-    WelcomePage,
     AboutPage,
     ContactPage,
     HomePage,
