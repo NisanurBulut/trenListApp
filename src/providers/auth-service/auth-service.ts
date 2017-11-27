@@ -24,6 +24,7 @@ export class AuthServiceProvider {
       })
         .subscribe(res => {        
           resolve(JSON.stringify(res));
+       
         }, (err) => {
           reject(err);
         });
@@ -31,16 +32,17 @@ export class AuthServiceProvider {
   }
   postDataforLogin(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
     return new Promise((resolve, reject) => {
-    console.log(credentials);
+
       this.http.post(apiUrlBase+type, //server adress
         credentials, //Gönderilen veriler
         {
         headers: new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded'), //header bilgileri
       })
         .subscribe(res => {
-         localStorage.setItem('userData', JSON.stringify(JSON.stringify(res)));
+        
           resolve(JSON.stringify(res));
-          console.log(JSON.stringify(res));
+          localStorage.setItem('userData', JSON.stringify(JSON.stringify(res)));
+         
         }, (err) => {
           alert("Birşeyler yanlış gitti");
           reject(err);

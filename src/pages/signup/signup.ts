@@ -29,7 +29,7 @@ export class SignupPage {
       this.responseData = result;
       console.log(this.responseData);
       localStorage.setItem('userData', JSON.stringify(this.responseData));
-     
+      console.log(JSON.parse(localStorage.getItem('userData')));
       this.navCtrl.push(LoginPage);
     }, (err) => {
       // Error log
