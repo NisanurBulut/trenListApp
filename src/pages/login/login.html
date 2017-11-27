@@ -14,5 +14,15 @@
 
 
 <ion-content padding>
-
+<ion-list>
+  <ion-item>
+      <ion-label fixed>Kullanıcı Adı</ion-label>
+      <ion-input type="text" value=""></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label fixed>Parola</ion-label>
+      <ion-input type="password"></ion-input>
+  </ion-item>
+  <button ion-button block color="primary" (click)="login()">Oturum Aç</button>
+</ion-list>
 </ion-content>

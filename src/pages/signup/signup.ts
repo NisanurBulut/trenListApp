@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {TabsPage} from '../tabs/tabs'
 /**
+ * 
  * Generated class for the SignupPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
@@ -21,5 +22,9 @@ export class SignupPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignupPage');
   }
-
+signup()
+{
+//api connections
+this.navCtrl.push(TabsPage);
+}
 }
