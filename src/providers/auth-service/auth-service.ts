@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 
-let apiUrl = 'http://localhost:50572/api/user/';
+let apiUrlBase = 'http://localhost:50572/';
 
 /*
   Generated class for the AuthServiceProvider provider.
@@ -14,25 +14,38 @@ let apiUrl = 'http://localhost:50572/api/user/';
 export class AuthServiceProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello AuthServiceProvider Provider');
+    console.log('Provider Yüklendi');
   }
   postData(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
-    console.log(credentials);
     return new Promise((resolve, reject) => {
-console.log(credentials);
-      this.http.post(apiUrl + type, //server adress
+      this.http.post(apiUrlBase+"api/user/" + type, //server adress
         JSON.stringify(credentials), //Gönderilen veriler
         {
         headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8'), //header bilgileri
       })
-        .subscribe(res => {
-          console.log(JSON.stringify(credentials));
+        .subscribe(res => {        
           resolve(JSON.stringify(res));
         }, (err) => {
           reject(err);
         });
     });
-
   }
-
+  postDataforLogin(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
+    return new Promise((resolve, reject) => {
+    console.log(credentials);
+      this.http.post(apiUrlBase+type, //server adress
+        credentials, //Gönderilen veriler
+        {
+        headers: new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded'), //header bilgileri
+      })
+        .subscribe(res => {
+         localStorage.setItem('userData', JSON.stringify(JSON.stringify(res)));
+          resolve(JSON.stringify(res));
+          console.log(JSON.stringify(res));
+        }, (err) => {
+          alert("Birşeyler yanlış gitti");
+          reject(err);
+        });
+    });
+  }
 }

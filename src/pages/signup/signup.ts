@@ -19,7 +19,7 @@ import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 })
 export class SignupPage {
   responseData : any;
-  userData = {"username": "","password": "", "name": "","email": ""};
+  userData = {"username": "","password": ""};
 
   constructor(public navCtrl: NavController, public authService:AuthServiceProvider ) {
   }
@@ -27,10 +27,10 @@ export class SignupPage {
   signup(){
      this.authService.postData(this.userData,'signup').then((result) => {
       this.responseData = result;
-      console.log(this.userData);
+      console.log(this.responseData);
       localStorage.setItem('userData', JSON.stringify(this.responseData));
      
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.push(LoginPage);
     }, (err) => {
       // Error log
     });

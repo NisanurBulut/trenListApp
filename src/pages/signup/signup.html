@@ -19,28 +19,19 @@
           </ion-card-header>
           <ion-card-content>
             <ion-list>
+             
               <ion-item>
-                <ion-label stacked>Name</ion-label>
-                <ion-input type="text" [(ngModel)]="userData.name"></ion-input>
-              </ion-item>
-      
-              <ion-item>
-                <ion-label stacked>Email</ion-label>
-                <ion-input type="text" [(ngModel)]="userData.email"></ion-input>
-              </ion-item>
-      
-              <ion-item>
-                <ion-label stacked>Username</ion-label>
+                <ion-label stacked>Kullanıcı Adı</ion-label>
                 <ion-input type="text" [(ngModel)]="userData.username"></ion-input>
               </ion-item>
       
               <ion-item>
-                <ion-label stacked>Password</ion-label>
+                <ion-label stacked>Parola</ion-label>
                 <ion-input type="password" [(ngModel)]="userData.password"></ion-input>
               </ion-item>
       
-              <button ion-button full color="success" (click)="signup()">Sign up</button>
-              <a href="#" (click)="login()">Login Page</a>
+              <button ion-button full color="success" (click)="signup()">Kaydol</button>
+              <a href="#" (click)="login()">Oturum AÇ</a>
             </ion-list>
           </ion-card-content>
         </ion-card>

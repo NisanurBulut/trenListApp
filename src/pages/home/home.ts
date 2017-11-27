@@ -11,7 +11,7 @@ export class HomePage {
     userDetails : any;
     responseData: any;
    
-    //userPostData = {"user_id":"","token":""};
+    userPostData = {"UId":"","token":""};
   
     constructor(public navCtrl: NavController, public authService:AuthServiceProvider,public app: App) {
     const data = JSON.parse(localStorage.getItem('userData'));
