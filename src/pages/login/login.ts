@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { ERR_CORDOVA_NOT_AVAILABLE } from '@ionic-native/core';
-import { TabsPage } from '../tabs/tabs';
 import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 import { SignupPage } from '../signup/signup';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
@@ -20,7 +20,7 @@ import { SignupPage } from '../signup/signup';
 export class LoginPage {
   responseData : any;
 
-  userData = {"UserName": "","Password": ""};
+  userData = {"UserName":"","Password": ""};
   tokenData={"access_token":"","token_type":"","expires_in":""}
   constructor(public navCtrl: NavController,public authService:AuthServiceProvider) {
   }
@@ -31,11 +31,13 @@ export class LoginPage {
   login()
   {
     var data = "username=" + this.userData.UserName + "&password="+this.userData.Password+"&grant_type=password";
+    
     this.authService.postDataforLogin(data,"token").then((result) => {
       this.responseData = result; 
+
       localStorage.setItem('tokenData', JSON.stringify(this.responseData)); //gelen cevabı setliyorum
     
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.push(HomePage);
     }, (err) => {
       // Error log
     });

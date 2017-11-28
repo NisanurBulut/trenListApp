@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { App } from 'ionic-angular/components/app/app';
-import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { CihazlistServiceProvider } from '../../providers/cihazlist-service/cihazlist-service';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  userDetails : any;
   responseData : any;
-  dataSet : any;
+  dataSetTrenL : any;
   userPostData:{"access_token":"","token_type":"","expires_in":""};
     constructor(public navCtrl: NavController, public cihazlistService:CihazlistServiceProvider,public app: App) {
       const data = JSON.parse(localStorage.getItem('tokenData'));
@@ -21,8 +19,8 @@ export class HomePage {
     
     this.cihazlistService.getDataforCL(this.userPostData, 'ListCihaz')
       .then((result) => {
-        this.responseData = result;
-       console.log(this.responseData);
+        this.dataSetTrenL = result;
+       console.log(this.dataSetTrenL);
       }, (err) => {
 
       });

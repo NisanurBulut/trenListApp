@@ -29,7 +29,7 @@ export class CihazlistServiceProvider {
       })
         .subscribe(res => {
         
-          resolve(JSON.stringify(res));
+          resolve(res);
           
         }, (err) => {
         console.log(err);
