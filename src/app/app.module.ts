@@ -24,7 +24,8 @@ import { CihazdServiceProvider } from '../providers/cihazd-service/cihazd-servic
     SignupPage, 
     HomePage,
     TrenDetailPage,
-    CihazDetayPage
+    CihazDetayPage,
+    CihazPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,8 @@ import { CihazdServiceProvider } from '../providers/cihazd-service/cihazd-servic
     SignupPage,  
     HomePage,
     TrenDetailPage,
-    CihazDetayPage
+    CihazDetayPage,
+    CihazPage
   ],
   providers: [
     StatusBar,

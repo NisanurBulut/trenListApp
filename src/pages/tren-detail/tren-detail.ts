@@ -29,7 +29,6 @@ export class TrenDetailPage {
   public setdtcihazList(dataset:any)
   {
 this.dataSetTCihaz=dataset;
-console.log(this.dataSetTCihaz);
   }
 getCihazList(_trenData:any)
 {

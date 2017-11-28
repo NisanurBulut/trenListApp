@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import {CihazPage} from '../pages/cihaz/cihaz'
+import { TrenDetailPage } from '../pages/tren-detail/tren-detail';
 export interface PageInterface {
   title: string;
   name: string;
@@ -35,8 +36,8 @@ export class MyApp {
      ) {
       this.pages=[
         { title: 'Tren Listesi', name: 'Home', component: HomePage,  index: 0, icon: 'attach' },
-        { title: 'Cihaz Listesi', name: 'Cihaz', component: CihazPage,  index: 1, icon: 'attach' },
-        { title: 'Oturum Kapat', name: 'TabsPage', component:LoginPage, icon: 'log-out', logsOut: true }
+        { title: 'Cihaz Listesi', name: 'Cihaz', component: TrenDetailPage,  index: 1, icon: 'attach' },
+        { title: 'Oturum Kapat', name: 'LoginPage', component:LoginPage, icon: 'log-out', logsOut: true }
       ];
     
     platform.ready().then(() => {
