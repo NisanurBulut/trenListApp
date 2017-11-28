@@ -1,20 +1,14 @@
 <ion-header>
-  <ion-navbar no-border-bottom>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-
-
-    <ion-buttons end>
-      <button  ion-button icon-only (click)="logout()">
-      <ion-icon name="md-log-out"></ion-icon>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
       </button>
-    </ion-buttons>
-  </ion-navbar>
+      <ion-title>Home</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
 
-</ion-header>
-
-  <ion-content padding>
+  <ion-content padding="">
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>

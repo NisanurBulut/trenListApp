@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController,MenuController } from 'ionic-angular';
 import { ERR_CORDOVA_NOT_AVAILABLE } from '@ionic-native/core';
 import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 import { SignupPage } from '../signup/signup';
 import { HomePage } from '../home/home';
-
+import { enableDebugTools } from '@angular/platform-browser/src/browser/tools/tools';
+import { NgForm } from '@angular/forms';
 /**
  * Generated class for the LoginPage page.
  *
@@ -18,29 +19,37 @@ import { HomePage } from '../home/home';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  responseData : any;
 
   userData = {"UserName":"","Password": ""};
-  tokenData={"access_token":"","token_type":"","expires_in":""}
-  constructor(public navCtrl: NavController,public authService:AuthServiceProvider) {
-  }
+  submitted = false;
 
-  ionViewDidLoad() {
+  responseData : any;
+  
+   tokenData={"access_token":"","token_type":"","expires_in":""}
+   constructor(public navCtrl: NavController,public authService:AuthServiceProvider,public menu: MenuController) {
+    this.menu.enable(false);
+   }
+   
+  
+   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-  login()
-  {
-    var data = "username=" + this.userData.UserName + "&password="+this.userData.Password+"&grant_type=password";
-    
-    this.authService.postDataforLogin(data,"token").then((result) => {
-      this.responseData = result; 
+  login(form: NgForm) {
+    this.submitted = true;
 
-      localStorage.setItem('tokenData', JSON.stringify(this.responseData)); //gelen cevabı setliyorum
-    
-      this.navCtrl.push(HomePage);
-    }, (err) => {
-      // Error log
-    });
+    if (form.valid) {
+      var data = "username=" + this.userData.UserName + "&password="+this.userData.Password+"&grant_type=password";
+      
+      this.authService.postDataforLogin(data,"token").then((result) => {
+        this.responseData = result; 
+  
+        localStorage.setItem('tokenData', JSON.stringify(this.responseData)); //gelen cevabı setliyorum
+        this.navCtrl.setRoot(HomePage);
+      
+      }, (err) => {
+        // Error log
+      });
+    }
   }
 signup()
 {

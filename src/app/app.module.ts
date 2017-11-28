@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import {LoginPage} from '../pages/login/login';
 import {SignupPage} from '../pages/signup/signup';
 import { HomePage } from '../pages/home/home';
+import {CihazPage} from '../pages/cihaz/cihaz';
 import {TrenDetailPage} from '../pages/tren-detail/tren-detail';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,7 +21,8 @@ import { TrencdServiceProvider } from '../providers/trencd-service/trencd-servic
     LoginPage,
     SignupPage, 
     HomePage,
-    TrenDetailPage
+    TrenDetailPage,
+    CihazPage
   ],
   imports: [
     BrowserModule,
@@ -34,13 +36,15 @@ import { TrencdServiceProvider } from '../providers/trencd-service/trencd-servic
     LoginPage,
     SignupPage,  
     HomePage,
-    TrenDetailPage
+    TrenDetailPage,
+    CihazPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     
-    {provide: ErrorHandler,
+    {
+      provide: ErrorHandler,
    useClass: IonicErrorHandler},
     AuthServiceProvider,
     TrenlistServiceProvider,
