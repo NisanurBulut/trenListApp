@@ -1,16 +1,25 @@
-import { Component } from '@angular/core';
-import { NavController,MenuController } from 'ionic-angular';
+
+import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angular';
+import { Component,Pipe, PipeTransform } from '@angular/core'
+import { FormControl } from '@angular/forms';
 import { App } from 'ionic-angular/components/app/app';
 import {TrenDetailPage} from '../tren-detail/tren-detail'
 import { TrenlistServiceProvider } from '../../providers/trenlist-service/trenlist-service';
+import {SearchTrenPipe} from '../../pipes/search-tren/search-tren';
 
-@Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+@Pipe({
+  name: 'filter',
+  pure: false
 })
-export class HomePage {
+@IonicPage()
+@Component({
+  selector: 'page-tren',
+  templateUrl: 'tren.html',
+})
+export class TrenPage  {
   responseData : any;
   dataSetTrenL : any;
+  term: string = '';
   userPostData:{"access_token":"","token_type":"","expires_in":""};
     constructor(public navCtrl: NavController, 
       public trenlistservice:TrenlistServiceProvider,
@@ -21,11 +30,18 @@ export class HomePage {
       this.userPostData=JSON.parse(data);
       this.getTrenList();
   }
+  ionViewDidLoad() {
+    this.app.setTitle('Tren Listesi');   
+
+  }
+   // ion input fire oldukça filter çalışssın :)
+   searchFn(ev: any) {
+    this.term = ev.target.value;
+  }
   getTrenList() {
     this.trenlistservice.getDataforCL(this.userPostData, 'ListTren')
       .then((result) => {
         this.dataSetTrenL = result;
-       console.log(this.dataSetTrenL);
       }, (err) => {
 
       });

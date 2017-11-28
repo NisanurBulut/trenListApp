@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Tren Listesi</ion-title>
+    </ion-navbar>
+
+      
+  <ion-toolbar no-border-top>
+      <ion-searchbar (ionInput)="searchFn($event)" placeholder="Ara"></ion-searchbar>
+   
+    </ion-toolbar>
+  </ion-header>
+  
+
+  <ion-content padding="">
+      
+         <ion-list>
+           <ion-item-sliding *ngFor="let tren  of dataSetTrenL | searchTren: term">
+              <button ion-item (click)="goToTrenDetail(tren)">
+                  <h3>{{tren.TrenId}}</h3>
+                  <p>
+                      {{tren.TrenAd}}
+                  
+                  </p>
+                </button>
+           </ion-item-sliding>
+                  
+         </ion-list>
+  </ion-content>
+
+  

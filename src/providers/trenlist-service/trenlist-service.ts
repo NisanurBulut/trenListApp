@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-let apiUrlBase = 'http://localhost:50572/api/data/';
 import { HttpClient } from '@angular/common/http';
+let apiUrlBase = 'http://localhost:50572/api/data/';
+
 /*
   Generated class for the TrenlistServiceProvider provider.
 
@@ -9,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 */
 @Injectable()
 export class TrenlistServiceProvider {
+  items: any;
   constructor(public http: HttpClient) {
     console.log('Hello CihazlistServiceProvider Provider');
   }
@@ -21,19 +23,15 @@ export class TrenlistServiceProvider {
         {
           headers: {'Content-Type': 'application/json; charset=utf-8',
           'Authorization':'bearer ' +credentials.access_token,
-
-        }
-         
+        }        
                //header bilgileri
-      })
-        .subscribe(res => {
-        
-          resolve(res);
-          
+      }).subscribe(res => {       
+          resolve(res);          
         }, (err) => {
         console.log(err);
           reject(err);
         });
     });
   }
+
 }

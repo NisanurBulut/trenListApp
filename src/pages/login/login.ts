@@ -3,9 +3,9 @@ import { IonicPage, NavController,MenuController } from 'ionic-angular';
 import { ERR_CORDOVA_NOT_AVAILABLE } from '@ionic-native/core';
 import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 import { SignupPage } from '../signup/signup';
-import { HomePage } from '../home/home';
 import { enableDebugTools } from '@angular/platform-browser/src/browser/tools/tools';
 import { NgForm } from '@angular/forms';
+import { TrenPage } from '../tren/tren';
 /**
  * Generated class for the LoginPage page.
  *
@@ -44,7 +44,7 @@ export class LoginPage {
         this.responseData = result; 
   
         localStorage.setItem('tokenData', JSON.stringify(this.responseData)); //gelen cevabı setliyorum
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(TrenPage);
       
       }, (err) => {
         // Error log

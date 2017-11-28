@@ -3,9 +3,9 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
-import { HomePage } from '../pages/home/home';
-import {CihazPage} from '../pages/cihaz/cihaz'
 import { TrenDetailPage } from '../pages/tren-detail/tren-detail';
+import { TrenPage } from '../pages/tren/tren';
+import {SearchTrenPipe} from '../pipes/search-tren/search-tren';
 export interface PageInterface {
   title: string;
   name: string;
@@ -13,8 +13,6 @@ export interface PageInterface {
   icon: string;
   logsOut?: boolean;
   index?: number;
-  tabName?: string;
-  tabComponent?: any;
 }
 
 @Component({
@@ -35,7 +33,7 @@ export class MyApp {
      splashScreen: SplashScreen,
      ) {
       this.pages=[
-        { title: 'Tren Listesi', name: 'Home', component: HomePage,  index: 0, icon: 'attach' },
+        { title: 'Tren Listesi', name: 'Tren', component: TrenPage,  index: 0, icon: 'attach' },
         { title: 'Cihaz Listesi', name: 'Cihaz', component: TrenDetailPage,  index: 1, icon: 'attach' },
         { title: 'Oturum Kapat', name: 'LoginPage', component:LoginPage, icon: 'log-out', logsOut: true }
       ];
