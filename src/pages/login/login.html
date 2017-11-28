@@ -12,19 +12,42 @@
 
 </ion-header>
 
+<ion-content>
+  <div class="logo">
+    <img src="assets/icon/favicon.ico" alt="Ionic logo">
+  </div>
 
-<ion-content padding>
-<ion-list>
-  <ion-item>
-    <ion-label stacked>Kullanıcı Adı</ion-label>
-    <ion-input type="text" [(ngModel)]="userData.UserName"></ion-input>
-  </ion-item>
+  <form #loginForm="ngForm" novalidate>
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label stacked color="primary">Kullanıcı Adı</ion-label>         
+        <ion-input [(ngModel)]="userData.UserName" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+          required>
+        </ion-input>
+      </ion-item>
+      <p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
+        Kullanıcı Adı Gereklidir.
+      </p>
 
-  <ion-item>
-    <ion-label stacked>Parola</ion-label>
-    <ion-input type="password" [(ngModel)]="userData.Password"></ion-input>
-  </ion-item>
-  <button ion-button block color="primary" (click)="login()">Oturum Aç</button>
-  <button ion-button block color="primary" (click)="signup()">Kaydol</button>
-</ion-list>
+      <ion-item>
+        <ion-label stacked color="primary">Parola</ion-label>
+        <ion-input [(ngModel)]="userData.Password" name="password" type="password" #password="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
+      Parola Gereklidir.
+      </p>
+    </ion-list>
+
+    <ion-row responsive-sm>
+      <ion-col>
+        <button ion-button (click)="login(loginForm)" type="submit" block>Oturum Aç</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button (click)="signup()" color="light" block>Kaydol</button>
+      </ion-col>
+    </ion-row>
+  </form>
+
 </ion-content>
+

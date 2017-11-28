@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { App } from 'ionic-angular/components/app/app';
 import { CihazlistServiceProvider } from '../../providers/cihazlist-service/cihazlist-service';
+import{TrenDetailPage} from '../tren-detail/tren-detail';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -25,7 +26,10 @@ export class HomePage {
 
       });
   }
-
+  goToTrenDetail(trenData:any)
+  {
+    this.navCtrl.push(TrenDetailPage, { trenId: trenData.trenId, trenAd: trenData.trenAd });
+  }
   convertTime(created) {
     let date = new Date(created * 1000);
     return date;

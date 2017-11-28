@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import {LoginPage} from '../pages/login/login';
 import {SignupPage} from '../pages/signup/signup';
 import { HomePage } from '../pages/home/home';
+import {TrenDetailPage} from '../pages/tren-detail/tren-detail';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     LoginPage,
     SignupPage, 
-    HomePage
+    HomePage,
+    TrenDetailPage
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginPage,
     SignupPage,  
     HomePage,
+    TrenDetailPage
   ],
   providers: [
     StatusBar,
