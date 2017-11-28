@@ -12,11 +12,14 @@
   
   <ion-content padding>
       <ion-list *ngFor="let tcihaz  of dataSetTCihaz">
-          
+          <ion-item>
+              <p>CTrenId:{{tcihaz.CTrenId}}</p>
+              <p>{{tcihaz.CAd}}</p>
+              <p>{{tcihaz.CDurum}}</p>
+              <p>{{tcihaz.Cid}}</p>
+              <p>{{tcihaz.CSonVeriTar}}</p>
+          </ion-item>
        
-          <h1>{{tcihaz.CAd}}</h1>
-          <h1>{{tcihaz.CDurum}}</h1>
-        
            
         </ion-list>
  
