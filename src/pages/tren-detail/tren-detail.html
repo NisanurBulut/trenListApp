@@ -5,14 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>TrenDetailPage</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+    <ion-navbar>
+      <ion-title >Detay</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+      <ion-list *ngFor="let tcihaz  of dataSetTCihaz">
+          
+       
+          <h1>{{tcihaz.CAd}}</h1>
+          <h1>{{tcihaz.CDurum}}</h1>
+        
+           
+        </ion-list>
+ 
+  </ion-content>

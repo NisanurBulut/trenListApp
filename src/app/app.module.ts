@@ -9,8 +9,9 @@ import {TrenDetailPage} from '../pages/tren-detail/tren-detail';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
-import {CihazlistServiceProvider} from '../providers/cihazlist-service/cihazlist-service'
+import { TrenlistServiceProvider } from '../providers/trenlist-service/trenlist-service';
 import { HttpClientModule } from '@angular/common/http';
+import { TrencdServiceProvider } from '../providers/trencd-service/trencd-service';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
     {provide: ErrorHandler,
    useClass: IonicErrorHandler},
     AuthServiceProvider,
-    CihazlistServiceProvider
+    TrenlistServiceProvider,
+    TrencdServiceProvider
   ]
 })
 export class AppModule {}
