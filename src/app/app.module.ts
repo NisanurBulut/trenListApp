@@ -7,13 +7,14 @@ import {SignupPage} from '../pages/signup/signup';
 import { HomePage } from '../pages/home/home';
 import {CihazDetayPage} from '../pages/cihaz-detay/cihaz-detay';
 import {TrenDetailPage} from '../pages/tren-detail/tren-detail';
-import {CihazPage} from '../cihaz/cihaz'
+import {CihazPage} from '../pages/cihaz/cihaz';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { TrenlistServiceProvider } from '../providers/trenlist-service/trenlist-service';
 import { HttpClientModule } from '@angular/common/http';
 import { TrencdServiceProvider } from '../providers/trencd-service/trencd-service';
+import { CihazdServiceProvider } from '../providers/cihazd-service/cihazd-service';
 
 
 @NgModule({
@@ -45,11 +46,12 @@ import { TrencdServiceProvider } from '../providers/trencd-service/trencd-servic
     SplashScreen,
     
     {
-      provide: ErrorHandler,
+   provide: ErrorHandler,
    useClass: IonicErrorHandler},
     AuthServiceProvider,
     TrenlistServiceProvider,
-    TrencdServiceProvider
+    TrencdServiceProvider,
+    CihazdServiceProvider
   ]
 })
 export class AppModule {}
