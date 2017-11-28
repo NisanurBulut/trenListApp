@@ -17,11 +17,13 @@
   <ion-content padding>
       <ion-list *ngFor="let tcihaz  of dataSetTCihaz">
           <ion-item>
+              <button ion-item (click)="goToCihazDetail(tcihaz)">
               <p>CTrenId:{{tcihaz.CTrenId}}</p>
               <p>{{tcihaz.CAd}}</p>
               <p>{{tcihaz.CDurum}}</p>
               <p>{{tcihaz.Cid}}</p>
               <p>{{tcihaz.CSonVeriTar}}</p>
+              </button>
           </ion-item>
        
            

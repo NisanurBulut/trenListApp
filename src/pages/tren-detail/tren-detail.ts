@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { App } from 'ionic-angular/components/app/app';
 import {TrencdServiceProvider} from '../../providers/trencd-service/trencd-service'
+import { CihazDetayPage } from '../cihaz-detay/cihaz-detay';
 /**
  * Generated class for the TrenDetailPage page.
  *
@@ -39,6 +40,10 @@ this.trencdservice.getCihazList(_trenData, 'ListCihaz')
 }, (err) => {
 
 });
+}
+goToCihazDetail(tcihaz:any)
+{
+  this.navCtrl.push(CihazDetayPage,tcihaz);
 }
   ionViewDidLoad() {
     console.log('ionViewDidLoad TrenDetailPage');

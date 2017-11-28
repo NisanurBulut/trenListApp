@@ -5,8 +5,9 @@ import { MyApp } from './app.component';
 import {LoginPage} from '../pages/login/login';
 import {SignupPage} from '../pages/signup/signup';
 import { HomePage } from '../pages/home/home';
-import {CihazPage} from '../pages/cihaz/cihaz';
+import {CihazDetayPage} from '../pages/cihaz-detay/cihaz-detay';
 import {TrenDetailPage} from '../pages/tren-detail/tren-detail';
+import {CihazPage} from '../cihaz/cihaz'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
@@ -22,7 +23,7 @@ import { TrencdServiceProvider } from '../providers/trencd-service/trencd-servic
     SignupPage, 
     HomePage,
     TrenDetailPage,
-    CihazPage
+    CihazDetayPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,7 @@ import { TrencdServiceProvider } from '../providers/trencd-service/trencd-servic
     SignupPage,  
     HomePage,
     TrenDetailPage,
-    CihazPage
+    CihazDetayPage
   ],
   providers: [
     StatusBar,
