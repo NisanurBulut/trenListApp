@@ -4,7 +4,7 @@ import { Component} from '@angular/core'
 import { App } from 'ionic-angular/components/app/app';
 import {TrenDetailPage} from '../tren-detail/tren-detail'
 import { TrenlistServiceProvider } from '../../providers/trenlist-service/trenlist-service';
-import { Network } from '@ionic-native/network';
+
 
 
 @IonicPage()
@@ -22,8 +22,7 @@ export class TrenPage  {
       public app: App,
       public menu: MenuController,
       private toastCtrl:ToastController,
-      private network:Network,
-      private servicenet:Network) {
+     ) {
   
       this.menu.enable(true);//menü aktif edilir
       const data = JSON.parse(localStorage.getItem('tokenData'));

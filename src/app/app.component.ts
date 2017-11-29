@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { TrenDetailPage } from '../pages/tren-detail/tren-detail';
 import { TrenPage } from '../pages/tren/tren';
-import {SearchTrenPipe} from '../pipes/search-tren/search-tren';
 import { Network } from '@ionic-native/network';
 
 
