@@ -1,16 +1,12 @@
 
-import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angular';
-import { Component,Pipe, PipeTransform } from '@angular/core'
-import { FormControl } from '@angular/forms';
+import { IonicPage, NavController,MenuController,ToastController } from 'ionic-angular';
+import { Component} from '@angular/core'
 import { App } from 'ionic-angular/components/app/app';
 import {TrenDetailPage} from '../tren-detail/tren-detail'
 import { TrenlistServiceProvider } from '../../providers/trenlist-service/trenlist-service';
-import {SearchTrenPipe} from '../../pipes/search-tren/search-tren';
+import { Network } from '@ionic-native/network';
 
-@Pipe({
-  name: 'filter',
-  pure: false
-})
+
 @IonicPage()
 @Component({
   selector: 'page-tren',
@@ -24,16 +20,19 @@ export class TrenPage  {
     constructor(public navCtrl: NavController, 
       public trenlistservice:TrenlistServiceProvider,
       public app: App,
-      public menu: MenuController) {
+      public menu: MenuController,
+      private toastCtrl:ToastController,
+      private network:Network,
+      private servicenet:Network) {
+  
       this.menu.enable(true);//menü aktif edilir
       const data = JSON.parse(localStorage.getItem('tokenData'));
       this.userPostData=JSON.parse(data);
       this.getTrenList();
   }
   ionViewDidLoad() {
-    this.app.setTitle('Tren Listesi');   
-
   }
+
    // ion input fire oldukça filter çalışssın :)
    searchFn(ev: any) {
     this.term = ev.target.value;
@@ -41,7 +40,7 @@ export class TrenPage  {
   getTrenList() {
     this.trenlistservice.getDataforCL(this.userPostData, 'ListTren')
       .then((result) => {
-        this.dataSetTrenL = result;
+        this.dataSetTrenL = result;       
       }, (err) => {
 
       });
@@ -59,7 +58,19 @@ export class TrenPage  {
      const root = this.app.getRootNav();
      root.popToRoot();
   }
+  public presentToast(_message:any) {
+    let toast = this.toastCtrl.create({
+      message: _message,
+      duration: 3000,
+      position: 'middle',
+      cssClass:''
+    });
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
   
+    toast.present();
+  }
   logout(){
        localStorage.clear();
        setTimeout(() => this.backToWelcome(), 1000);

@@ -1,43 +1,43 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController,MenuController } from 'ionic-angular';
+import { IonicPage, NavController,MenuController,ToastController} from 'ionic-angular';
 import { ERR_CORDOVA_NOT_AVAILABLE } from '@ionic-native/core';
 import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 import { SignupPage } from '../signup/signup';
 import { enableDebugTools } from '@angular/platform-browser/src/browser/tools/tools';
 import { NgForm } from '@angular/forms';
 import { TrenPage } from '../tren/tren';
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
 @IonicPage()
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html',
+  templateUrl: 'login.html'
 })
 export class LoginPage {
 
   userData = {"UserName":"","Password": ""};
   submitted = false;
-
   responseData : any;
-  
-   tokenData={"access_token":"","token_type":"","expires_in":""}
-   constructor(public navCtrl: NavController,public authService:AuthServiceProvider,public menu: MenuController) {
+  tokenData={"access_token":"","token_type":"","expires_in":""}
+  constructor(
+    public navCtrl:NavController,
+    public authService:AuthServiceProvider,
+    public menu: MenuController,
+    private toastCtrl:ToastController,
+    private netProvider:NetworkDetectProvider
+  ) {  
+    this.addConnectivityListeners();
     this.menu.enable(false);
-   }
-   
-  
+  }
    ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    this.addConnectivityListeners();
+  }
+  onOnline() {
+    console.log("onlineım");
   }
   login(form: NgForm) {
     this.submitted = true;
-
     if (form.valid) {
+      if(this.netProvider.isOnline()){
       var data = "username=" + this.userData.UserName + "&password="+this.userData.Password+"&grant_type=password";
       
       this.authService.postDataforLogin(data,"token").then((result) => {
@@ -47,13 +47,39 @@ export class LoginPage {
         this.navCtrl.setRoot(TrenPage);
       
       }, (err) => {
-        // Error log
+        
       });
     }
+    else {  
+      alert("net bağlantınız yok");
+           console.log("İnternet Bağlantınız Yok");     
+       }
+  }
+
   }
 signup()
 {
   //SignupPage page link
   this.navCtrl.push(SignupPage);
 }
+
+addConnectivityListeners(){
+  
+     let onOnline = () => {
+  
+      setTimeout(() => {
+      console.log("net var");
+      }, 2000);
+ 
+       };
+  
+     let onOffline = () => {
+    console.log("net yok");
+     };
+  
+     document.addEventListener('online', onOnline, false);
+     document.addEventListener('offline', onOffline, false);
+  
+   }
+
 }

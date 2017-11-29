@@ -6,6 +6,9 @@ import { LoginPage } from '../pages/login/login';
 import { TrenDetailPage } from '../pages/tren-detail/tren-detail';
 import { TrenPage } from '../pages/tren/tren';
 import {SearchTrenPipe} from '../pipes/search-tren/search-tren';
+import { Network } from '@ionic-native/network';
+
+
 export interface PageInterface {
   title: string;
   name: string;
@@ -19,11 +22,8 @@ export interface PageInterface {
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
-  
-    pages: PageInterface[];
-  
-    
+  @ViewChild(Nav) nav: Nav; 
+    pages: PageInterface[];    
   rootPage:any = LoginPage;
 
   constructor(
@@ -31,6 +31,7 @@ export class MyApp {
     platform: Platform,
      statusBar: StatusBar, 
      splashScreen: SplashScreen,
+     public netService:Network
      ) {
       this.pages=[
         { title: 'Tren Listesi', name: 'Tren', component: TrenPage,  index: 0, icon: 'attach' },
@@ -39,12 +40,13 @@ export class MyApp {
       ];
     
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      document.addEventListener("offline",this.netService.onDisconnect, false);
       statusBar.styleDefault();
       splashScreen.hide();
-    });
+     
+  });
   }
+
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
