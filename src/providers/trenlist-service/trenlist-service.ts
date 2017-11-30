@@ -21,7 +21,8 @@ export class TrenlistServiceProvider {
         params:{'id':tpLength}
       })
       .subscribe(data => {       
-          resolve(data);          
+          resolve(data);
+          console.log(data);        
         }, (err) => {
         console.log(err);
           reject(err);

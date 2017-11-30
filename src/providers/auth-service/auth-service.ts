@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-
+import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
 @Injectable()
 export class AuthServiceProvider {
   private apiUrlBase = 'http://localhost:50572/';
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private netProvider:NetworkDetectProvider) {
     console.log('Provider Yüklendi');
   }
   postData(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
@@ -18,6 +18,7 @@ export class AuthServiceProvider {
           resolve(JSON.stringify(res));
        
         }, (err) => {
+          this.netProvider.ShowAlert(err.name, err.message);  
           reject(err);
         });
     });
@@ -34,7 +35,8 @@ export class AuthServiceProvider {
           resolve(JSON.stringify(res));
           localStorage.setItem('userData', JSON.stringify(JSON.stringify(res)));
          
-        }, (err) => {       
+        }, (err) => {   
+          this.netProvider.ShowAlert(err.name, err.message);    
           reject(err);
         });
     });

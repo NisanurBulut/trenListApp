@@ -46,8 +46,7 @@ export class LoginPage {
         this.navCtrl.setRoot(TrenPage);
       
       }, (err) => {
-        this.netProvider.ShowAlert(err.name, err.message);
-        console.log(err);
+       //Serverdan gelen hata serviste alert edilir
       });
     }
     else { 
