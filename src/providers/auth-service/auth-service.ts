@@ -43,8 +43,7 @@ export class AuthServiceProvider {
           resolve(JSON.stringify(res));
           localStorage.setItem('userData', JSON.stringify(JSON.stringify(res)));
          
-        }, (err) => {
-          alert("Birşeyler yanlış gitti");
+        }, (err) => {       
           reject(err);
         });
     });

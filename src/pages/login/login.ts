@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController,MenuController,ToastController} from 'ionic-angular';
+import { IonicPage, NavController,MenuController,AlertController } from 'ionic-angular';
 import { ERR_CORDOVA_NOT_AVAILABLE } from '@ionic-native/core';
 import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 import { SignupPage } from '../signup/signup';
@@ -22,40 +22,37 @@ export class LoginPage {
     public navCtrl:NavController,
     public authService:AuthServiceProvider,
     public menu: MenuController,
-    private toastCtrl:ToastController,
-    private netProvider:NetworkDetectProvider
+    private netProvider:NetworkDetectProvider,
+    private alertCtrl: AlertController
   ) {  
-    this.addConnectivityListeners();
+    this.netProvider.isOnline();
     this.menu.enable(false);
+    this.netProvider.checkConnection();
   }
    ionViewDidLoad() {
-    this.addConnectivityListeners();
+   this.netProvider.checkConnection();
   }
-  onOnline() {
-    console.log("onlineım");
-  }
+
   login(form: NgForm) {
     this.submitted = true;
     if (form.valid) {
       if(this.netProvider.isOnline()){
       var data = "username=" + this.userData.UserName + "&password="+this.userData.Password+"&grant_type=password";
-      
+      this.netProvider.checkConnection();
       this.authService.postDataforLogin(data,"token").then((result) => {
-        this.responseData = result; 
-  
+        this.responseData = result;  
         localStorage.setItem('tokenData', JSON.stringify(this.responseData)); //gelen cevabı setliyorum
         this.navCtrl.setRoot(TrenPage);
       
       }, (err) => {
-        
+        this.netProvider.ShowAlert(err.name, err.message);
+        console.log(err);
       });
     }
-    else {  
-      alert("net bağlantınız yok");
-           console.log("İnternet Bağlantınız Yok");     
+    else { 
+      this.netProvider.ShowAlert('NetWork','İnternet Bağlantınız Yok');        
        }
   }
-
   }
 signup()
 {
