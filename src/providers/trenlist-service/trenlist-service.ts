@@ -1,32 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-let apiUrlBase = 'http://localhost:50572/api/data/';
-
-/*
-  Generated class for the TrenlistServiceProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
+import 'rxjs/add/operator/map';
 @Injectable()
 export class TrenlistServiceProvider {
-  items: any;
+  private apiUrlBase= 'http://localhost:50572/api/data/';;
+  perpage:number = 10; //Sayfa da başlangıç olarak 10 tane gösterilsin diyorum
+  private userPostData:{"access_token":"","token_type":"","expires_in":""};
   constructor(public http: HttpClient) {
-    console.log('Hello CihazlistServiceProvider Provider');
+    const data = JSON.parse(localStorage.getItem('tokenData'));
+    this.userPostData=JSON.parse(data);
   }
-  getDataforCL(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
-   
+  getDataforCL(tpLength) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
     return new Promise((resolve, reject) => {
-
       this.http.get(
-        apiUrlBase+type, //server adress
+        this.apiUrlBase+'ListTren', //server adress
         {
           headers: {'Content-Type': 'application/json; charset=utf-8',
-          'Authorization':'bearer ' +credentials.access_token,
-        }        
-               //header bilgileri
-      }).subscribe(res => {       
-          resolve(res);          
+          'Authorization':'bearer ' +this.userPostData.access_token          
+        }, //header bilgileri
+        params:{'id':tpLength}
+      })
+      .subscribe(data => {       
+          resolve(data);          
         }, (err) => {
         console.log(err);
           reject(err);

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController,MenuController,AlertController } from 'ionic-angular';
+import { IonicPage, NavController,MenuController } from 'ionic-angular';
 import { ERR_CORDOVA_NOT_AVAILABLE } from '@ionic-native/core';
 import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 import { SignupPage } from '../signup/signup';
@@ -7,6 +7,7 @@ import { enableDebugTools } from '@angular/platform-browser/src/browser/tools/to
 import { NgForm } from '@angular/forms';
 import { TrenPage } from '../tren/tren';
 import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -23,7 +24,7 @@ export class LoginPage {
     public authService:AuthServiceProvider,
     public menu: MenuController,
     private netProvider:NetworkDetectProvider,
-    private alertCtrl: AlertController
+    private alertCtrl:AlertController
   ) {  
     this.netProvider.isOnline();
     this.menu.enable(false);

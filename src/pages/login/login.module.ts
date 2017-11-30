@@ -10,7 +10,8 @@ import {NetworkDetectProvider} from '../../providers/network-detect/network-dete
     LoginPage,
     TrenPage,
     Network,
-    NetworkDetectProvider
+    NetworkDetectProvider,
+    AlertController
   ],
   imports: [
     IonicPageModule.forChild(LoginPage),
