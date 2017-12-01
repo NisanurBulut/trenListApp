@@ -5,15 +5,22 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar swipeBackEnabled="false">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Cihaz Listesi</ion-title>
+    <ion-title>{{TrenData.TrenAd}}'in Cihazları</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+    <ion-item-sliding inset *ngFor="let tcihaz  of dataSetTCihaz">  
+       
+        <button ion-item (click)="goToCihazDetail(tcihaz)">            
+              <p class="csv-date">Son Verilme Tarihi: {{tcihaz.CSonVeriTar | date: "dd/MM/yyyy H:mm"}}</p>
+              <p class="bold">{{tcihaz.CAd}} <ion-icon name="{{tcihaz.iconString}}"></ion-icon></p>             
+        </button>             
+      </ion-item-sliding>
 
 </ion-content>

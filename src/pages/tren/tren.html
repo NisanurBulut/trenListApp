@@ -17,8 +17,8 @@
   <ion-content padding>
          <ion-list>
            <ion-item-sliding *ngFor="let tren  of dataSetTrenL | searchTren: term">
-              <button ion-item text-center (click)="goToTrenDetail(tren)">                
-                  <p>{{tren.TrenAd}}</p>
+              <button ion-item text-center (click)="goToTrenDetail(tren)"> 
+                  <ion-label>{{tren.TrenAd}}</ion-label>                                   
                 </button>
            </ion-item-sliding>                  
          </ion-list>

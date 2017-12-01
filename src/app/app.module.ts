@@ -6,7 +6,6 @@ import { MyApp } from './app.component';
 import {LoginPage} from '../pages/login/login';
 import {SignupPage} from '../pages/signup/signup';
 import {CihazDetayPage} from '../pages/cihaz-detay/cihaz-detay';
-import {TrenDetailPage} from '../pages/tren-detail/tren-detail';
 import {CihazPage} from '../pages/cihaz/cihaz';
 import {TrenPage} from '../pages/tren/tren';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -18,14 +17,13 @@ import { TrencdServiceProvider } from '../providers/trencd-service/trencd-servic
 import { CihazdServiceProvider } from '../providers/cihazd-service/cihazd-service';
 import {SearchTrenPipe} from '../pipes/search-tren/search-tren';
 import { NetworkDetectProvider } from '../providers/network-detect/network-detect';
-
+import {User} from '../models/user-model';
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
     TrenPage,
     SignupPage, 
-    TrenDetailPage,
     CihazDetayPage,
     CihazPage,
     SearchTrenPipe
@@ -43,7 +41,6 @@ import { NetworkDetectProvider } from '../providers/network-detect/network-detec
     LoginPage,
     TrenPage,
     SignupPage,  
-    TrenDetailPage,
     CihazDetayPage,
     CihazPage  
   ],
@@ -51,6 +48,7 @@ import { NetworkDetectProvider } from '../providers/network-detect/network-detec
     StatusBar,
     SplashScreen, 
     Network,
+    User,
     {
    provide: ErrorHandler,
    useClass: IonicErrorHandler},

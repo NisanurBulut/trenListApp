@@ -1,12 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform,Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
-import { TrenDetailPage } from '../pages/tren-detail/tren-detail';
 import { TrenPage } from '../pages/tren/tren';
 import { Network } from '@ionic-native/network';
-
+import {User} from '../models/user-model';
 
 export interface PageInterface {
   title: string;
@@ -15,6 +14,7 @@ export interface PageInterface {
   icon: string;
   logsOut?: boolean;
   index?: number;
+
 }
 
 @Component({
@@ -26,29 +26,36 @@ export class MyApp {
   rootPage:any = LoginPage;
 
   constructor(
-   
+    public events: Events,
     platform: Platform,
      statusBar: StatusBar, 
      splashScreen: SplashScreen,
-     public netService:Network
+     public netService:Network,
+     public currentUser:User
      ) {
       this.pages=[
         { title: 'Tren Listesi', name: 'Tren', component: TrenPage,  index: 0, icon: 'attach' },
-        { title: 'Oturum Kapat', name: 'LoginPage', component:LoginPage, icon: 'log-out', logsOut: true }
+        { title: 'Oturum Kapat', name: 'LoginPage', component:null, icon: 'log-out', }
       ];
-    
+  
     platform.ready().then(() => {
       document.addEventListener("offline",this.netService.onDisconnect, false);
       statusBar.styleDefault();
       splashScreen.hide();
-     
   });
-  }
 
+  }
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if(page.component) {
+      this.nav.setRoot(page.component);
+  } else {
+     
+      this.currentUser.setisAuthenticated(false);
+      this.currentUser=undefined;
+      console.log(this.currentUser);
+      this.nav.setRoot(LoginPage);
+  }
+   
   }
 
 }

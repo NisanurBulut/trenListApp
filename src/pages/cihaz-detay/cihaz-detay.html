@@ -7,20 +7,15 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>cihazDetay</ion-title>
+    <ion-title>{{datacihazd.CAd}}'in Detayları</ion-title>
   </ion-navbar>
 
 </ion-header>
-
 <ion-content padding="">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
-         <ion-list *ngFor="let cdetay  of dataSetCD">
-<ion-item>
-  <p>{{cdetay.DetayCihazId}}</p>
-  <p>{{cdetay.DetayErisimSonTar}}</p>
-  <p>{{cdetay.DetayStr}}</p>
-  <p>{{cdetay.DetayId}}</p>
-  </ion-item>          
-         </ion-list>
+    <ion-item-sliding inset *ngFor="let cdetay  of dataSetCD">
+    <button ion-item>            
+        <p class="csv-date">Son Verilme Tarihi: {{cdetay.DetayErisimSonTar | date: "dd/MM/yyyy H:mm"}}</p>
+        <p class="bold">{{cdetay.DetayStr}}</p>      
+    </button>           
+    </ion-item-sliding>
+</ion-content>

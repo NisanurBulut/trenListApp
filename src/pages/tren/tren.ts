@@ -2,9 +2,9 @@
 import { IonicPage, NavController,MenuController } from 'ionic-angular';
 import { Component} from '@angular/core'
 import { App } from 'ionic-angular/components/app/app';
-import {TrenDetailPage} from '../tren-detail/tren-detail'
 import { TrenlistServiceProvider } from '../../providers/trenlist-service/trenlist-service';
 import { NetworkDetectProvider } from '../../providers/network-detect/network-detect';
+import { CihazPage } from '../cihaz/cihaz';
 
 
 
@@ -83,7 +83,7 @@ export class TrenPage  {
   
   goToTrenDetail(trenData:any)
   {
-    this.navCtrl.push(TrenDetailPage,trenData);
+    this.navCtrl.push(CihazPage,trenData);
   }
   backToWelcome(){
      const root = this.app.getRootNav();

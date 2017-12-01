@@ -7,7 +7,7 @@ import { enableDebugTools } from '@angular/platform-browser/src/browser/tools/to
 import { NgForm } from '@angular/forms';
 import { TrenPage } from '../tren/tren';
 import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
-import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import {User} from '../../models/user-model';
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -24,7 +24,7 @@ export class LoginPage {
     public authService:AuthServiceProvider,
     public menu: MenuController,
     private netProvider:NetworkDetectProvider,
-    private alertCtrl:AlertController
+    private currenUser:User
   ) {  
     this.netProvider.isOnline();
     this.menu.enable(false);
@@ -41,8 +41,15 @@ export class LoginPage {
       var data = "username=" + this.userData.UserName + "&password="+this.userData.Password+"&grant_type=password";
       this.netProvider.checkConnection();
       this.authService.postDataforLogin(data,"token").then((result) => {
-        this.responseData = result;  
-        localStorage.setItem('tokenData', JSON.stringify(this.responseData)); //gelen cevabı setliyorum
+        this.responseData=result;   
+        this.tokenData=JSON.parse(this.responseData); 
+        this.currenUser.setCurrentUser(
+          this.userData.UserName,
+          this.userData.Password,
+          this.tokenData.access_token,
+          this.tokenData.token_type,
+          true);    
+        localStorage.setItem('currentUser', JSON.stringify(this.currenUser)); //gelen cevabı setliyorum
         this.navCtrl.setRoot(TrenPage);
       
       }, (err) => {
@@ -54,6 +61,12 @@ export class LoginPage {
        }
   }
   }
+  logout(): void {
+    this.currenUser.setisAuthenticated(false);
+    this.currenUser=undefined;
+    localStorage.clear();
+    console.log(this.currenUser);
+  };
 signup()
 {
   //SignupPage page link
@@ -78,5 +91,6 @@ addConnectivityListeners(){
      document.addEventListener('offline', onOffline, false);
   
    }
+ 
 
 }
