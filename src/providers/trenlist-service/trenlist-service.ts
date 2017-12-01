@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { User } from '../../models/user-model';
+import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
 @Injectable()
 export class TrenlistServiceProvider {
-  private apiUrlBase= 'http://vkbanalizapi.somee.com/api/data/';
+  private apiUrlBase = 'http://vkbanalizapi.somee.com/api/data/';
   perpage:number = 10; //Sayfa da başlangıç olarak 10 tane gösterilsin diyorum
-  constructor(public http: HttpClient, private currentUser:User) { //tanımlama yapmamla bırlıkte cekiyor
+  constructor(public http: HttpClient, private currentUser:User, private netProvider:NetworkDetectProvider) { //tanımlama yapmamla bırlıkte cekiyor
   console.log(this.currentUser);
   }
   getDataforCL(tpLength) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
@@ -15,6 +16,8 @@ export class TrenlistServiceProvider {
         this.apiUrlBase+'ListTren', //server adress
         {
           headers: {'Content-Type': 'application/json; charset=utf-8',
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
           'Authorization':this.currentUser.getAuthorization()    
         }, //header bilgileri
         params:{'id':tpLength}
@@ -23,7 +26,8 @@ export class TrenlistServiceProvider {
           resolve(data);
           console.log(data);        
         }, (err) => {
-        console.log(err);
+          console.log(err);
+          this.netProvider.PrepareAlert(err);    
           reject(err);
         });
     });

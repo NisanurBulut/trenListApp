@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Network } from '@ionic-native/network';
 import { Platform,AlertController} from 'ionic-angular';
+import { HttpClient,HttpResponse } from '@angular/common/http';
 
 
 declare var navigator: any;
@@ -18,30 +19,27 @@ export class NetworkDetectProvider {
   
    constructor(private platform: Platform, 
     private network:Network,
-    private alertCtrl:AlertController
-  ){
+    private alertCtrl:AlertController){
      this.onDevice = this.platform.is('cordova');
+     console.log(this.onDevice);
    }
   
-   isOnline(): boolean {
-     if(this.onDevice && this.network.type){
-       return this.network.type !== Connection.NONE;
-     } else {
-       return navigator.onLine;
-     }
-   }
-  
-   isOffline(): boolean {
-     if(this.onDevice && this.network.type){
-      alert("net bağlantısı var");
-       return this.network.type === Connection.NONE;
+   isOnline() {
     
-     } else {
-      console.log("offline");     
-       return !navigator.onLine;  
-     }
    }
-
+  
+   isOffline():boolean {
+    this.network.onDisconnect().subscribe(data => {
+      console.log(data);
+      return true;
+    }, error => console.error(error));
+    return false;
+   }
+   displayNetworkUpdate(connectionState: string){
+    let networkType = this.network.type;
+    this.ShowAlert('You are now ${connectionState} via ${networkType','');
+    
+  }
    checkConnection(){
     this.network.onchange().subscribe(() => {
       switch (this.network.type) {
@@ -54,13 +52,37 @@ export class NetworkDetectProvider {
       }
     });
    }
-   ShowAlert(title:any, message:any){
+   PrepareAlert(err:Response)
+   {
+switch(err["status"])
+{
+case 400:
+this.ShowAlert("İstek Hatası","Uygulama Ön Belleğini Temizleyip Tekrar Deneyiniz.");
+break;
+case 401:
+this.ShowAlert("Erişim Sınırlaması","Bu Alana Erişim İzniniz Bulunmamaktadır.");
+break;
+case 500:
+this.ShowAlert("Adres Hatası","İstenen Veri yolu Bulunamadı");
+break;
+case 403:
+this.ShowAlert("Erişim Sınırlaması","Bu Alana Erişim İzniniz Bulunmamaktadır.");
+break;
+case 404:
+this.ShowAlert("Kayıp Adres","Erişmeye Çalıştığınız Alan Bulunamadı.");
+break;
+default:
+this.ShowAlert(err["name"],err["message"]);
+break;
+}
+   }
+   ShowAlert(_title:string,_message:string){
     let alert=this.alertCtrl.create({
-      title: title,
-      subTitle: message,
-      buttons: ['Tamam']
-    });
-  alert.present(); 
+      title:_title,
+      subTitle:_message,
+     buttons: ['Tamam']
+   });
+   alert.present();
    }
   
 }

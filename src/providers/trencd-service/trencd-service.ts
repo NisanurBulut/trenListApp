@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user-model';
-
+import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
 @Injectable()
 export class TrencdServiceProvider {
   private apiUrlBase = 'http://vkbanalizapi.somee.com/api/data/';
   
-  constructor(public http: HttpClient,private currentUser:User) {
+  constructor(public http: HttpClient,private currentUser:User,private netProvider:NetworkDetectProvider) {
     const data = JSON.parse(localStorage.getItem('currentUser'));
   }
   getCihazList(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
@@ -24,7 +24,7 @@ export class TrencdServiceProvider {
           // console.log(res);      
            resolve(res);         
          }, (err) => {
-         console.log(err);
+          this.netProvider.ShowAlert(err.name, err.message);  
            reject(err);
          });
      });

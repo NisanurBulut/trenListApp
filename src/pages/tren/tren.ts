@@ -28,15 +28,11 @@ export class TrenPage  {
       if(this.netProvider.isOnline()){//Online mı değil mi
       this.tlStart=0;
       this.getTrenList(this.tlStart);//Sayfa yüklenirken 0 değeriyle alıyorum
-      }
-      else { 
-        this.netProvider.ShowAlert('NetWork','İnternet Bağlantınız Yok');        
-         }
+      }    
   }
   ionViewDidLoad() {
     console.log("view");
   }
-
    // ion input fire oldukça filter çalışssın :)
    searchFn(ev: any) {
     this.term = ev.target.value;
@@ -55,7 +51,7 @@ export class TrenPage  {
         }          
           
       }, (err) => {
-        this.netProvider.ShowAlert(err.name,err.message); //sunucudan dönen  hatayı gösterelim
+        this.netProvider.PrepareAlert(err); //sunucudan dönen  hatayı gösterelim
               });           
     })
   }
@@ -74,7 +70,7 @@ export class TrenPage  {
               this.statusScroll=false;
             }           
           }, (err) => {
-            this.netProvider.ShowAlert(err.name,err.message); //sunucudan dönen  hatayı gösterelim
+            this.netProvider.PrepareAlert(err); //sunucudan dönen  hatayı gösterelim
                   });  
           resolve();
         }, 500);
@@ -83,15 +79,13 @@ export class TrenPage  {
   
   goToTrenDetail(trenData:any)
   {
+    //buraya bir isonline atalım
     this.navCtrl.push(CihazPage,trenData);
   }
-  backToWelcome(){
+  backToPage(){
      const root = this.app.getRootNav();
      root.popToRoot();
   }
-  logout(){
-       localStorage.clear();
-       setTimeout(() => this.backToWelcome(), 1000);
-  }
+
   
 }

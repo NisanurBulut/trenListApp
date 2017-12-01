@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user-model';
+import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
 @Injectable()
 export class CihazdServiceProvider {
   private apiUrlBase = 'http://vkbanalizapi.somee.com/api/data/';
-  constructor(public http: HttpClient,private currentUser:User) {
+  constructor(public http: HttpClient,private currentUser:User,private netProvider:NetworkDetectProvider) {
     const data = JSON.parse(localStorage.getItem('currentUser'));
     console.log(this.currentUser);
   }
@@ -15,7 +16,9 @@ export class CihazdServiceProvider {
          {
            headers: {
           'Content-Type': 'application/json; charset=utf-8',
-           'Authorization':this.currentUser.getAuthorization()              
+           'Authorization':this.currentUser.getAuthorization(),
+           "Access-Control-Allow-Origin": "*",
+           "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"            
          },
          params:{'id':credentials.Cid}          
                 //header bilgileri
@@ -23,6 +26,7 @@ export class CihazdServiceProvider {
            resolve(res);           
          }, (err) => {
          console.log(err);
+         this.netProvider.ShowAlert(err.name, err.message);   
            reject(err);
          });
      });

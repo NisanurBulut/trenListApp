@@ -4,6 +4,7 @@ import { App } from 'ionic-angular/components/app/app';
 import {TrencdServiceProvider} from '../../providers/trencd-service/trencd-service'
 import { CihazDetayPage } from '../cihaz-detay/cihaz-detay';
 import { ControlContainer } from '@angular/forms/src/directives/control_container';
+import { NetworkDetectProvider } from '../../providers/network-detect/network-detect';
 
 /**
  * Generated class for the CihazPage page.
@@ -20,12 +21,18 @@ import { ControlContainer } from '@angular/forms/src/directives/control_containe
 export class CihazPage {
   private TrenData={"TrenAd":"","TrenAId":""};
   private dataSetTCihaz:any;
-   constructor(public navCtrl: NavController, public navParams: NavParams,public trencdservice:TrencdServiceProvider,public app: App)
+   constructor(public navCtrl: NavController,
+     public navParams: NavParams,
+    public trencdservice:TrencdServiceProvider,
+    public netProvider:NetworkDetectProvider,
+    public app: App)
     {
+      if(this.netProvider.isOffline()){//Online mı değil mi
      //Tren sayfasından gelen detayları listelenecel olan
     this.TrenData=this.navParams.data
     //setlendi
     this.getCihazList(this.TrenData);
+      }
    }
    public setdtcihazList(dataset:any)
    {
@@ -62,14 +69,16 @@ export class CihazPage {
  this.trencdservice.getCihazList(_trenData, 'ListCihaz')
  .then((result) => {
    this.setdtcihazList(result);
-  
  }, (err) => {
  
  });
  }
  goToCihazDetail(tcihaz:any)
  {
+  if(this.netProvider.isOffline()){//Online mı değil mi
+    //Tren sayfasından gelen detayları listelenecel olan
    this.navCtrl.push(CihazDetayPage,tcihaz);
+  }
  }
    ionViewDidLoad() {
      console.log('ionViewDidLoad TrenDetailPage');

@@ -5,9 +5,8 @@ import { User } from '../../models/user-model';
 @Injectable()
 export class AuthServiceProvider {
   private apiUrlBase = 'http://vkbanalizapi.somee.com/';
-  private tokenData:{"access_token":"","token_type":"","expires_in":""};
   constructor(public http: HttpClient,
-     private netProvider:NetworkDetectProvider
+  private netProvider:NetworkDetectProvider
     ) {
     console.log('Provider Yüklendi');
   }
@@ -37,9 +36,7 @@ export class AuthServiceProvider {
                   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"} //header bilgileri
       })
         .subscribe(res => {     
-          resolve(JSON.stringify(res));                
-          localStorage.setItem('userData', JSON.stringify(JSON.stringify(res)));
-         
+          resolve(JSON.stringify(res));                          
         }, (err) => {   
         console.log(err);
           this.netProvider.ShowAlert(err.name, err.message);    

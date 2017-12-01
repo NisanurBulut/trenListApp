@@ -37,7 +37,7 @@ export class LoginPage {
   login(form: NgForm) {
     this.submitted = true;
     if (form.valid) {
-      if(this.netProvider.isOnline()){
+      //if(this.netProvider.isOnline()){
       var data = "username=" + this.userData.UserName + "&password="+this.userData.Password+"&grant_type=password";
       this.netProvider.checkConnection();
       this.authService.postDataforLogin(data,"token").then((result) => {
@@ -56,10 +56,7 @@ export class LoginPage {
        //Serverdan gelen hata serviste alert edilir
       });
     }
-    else { 
-      this.netProvider.ShowAlert('NetWork','İnternet Bağlantınız Yok');        
-       }
-  }
+  //}
   }
   logout(): void {
     this.currenUser.setisAuthenticated(false);

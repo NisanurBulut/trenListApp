@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CihazdServiceProvider } from '../../providers/cihazd-service/cihazd-service';
-
-/**
- * Generated class for the CihazDetayPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { NetworkDetectProvider } from '../../providers/network-detect/network-detect';
 
 @IonicPage()
 @Component({
@@ -17,12 +11,15 @@ import { CihazdServiceProvider } from '../../providers/cihazd-service/cihazd-ser
 export class CihazDetayPage {
   private dataSetCD:any;
   private datacihazd:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public cihazdetayervice:CihazdServiceProvider) {
+  constructor(public navCtrl: NavController,
+     public navParams: NavParams,
+     public cihazdetayervice:CihazdServiceProvider,
+    public netProvider:NetworkDetectProvider) {
     //Http isteği yapacağız
     this.datacihazd=this.navParams.data;
-    console.log(this.datacihazd); //Cihazın bilgilerini alıyorum
+    if(this.netProvider.isOnline()){//Online mı değil mi
     this.getCihazDetayList();
-    
+    }
   }
   getCihazDetayList() {
     this.cihazdetayervice.getDataforCD(this.datacihazd, 'ListCihazDetay')
@@ -34,7 +31,7 @@ export class CihazDetayPage {
       });
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CihazDetayPage');
+   this.netProvider.isOffline();
   }
 
 }
