@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 @Injectable()
 export class TrenlistServiceProvider {
-  private apiUrlBase= 'http://localhost:50572/api/data/';;
+  private apiUrlBase= 'http://vkbanalizapi.somee.com/api/data/';
   perpage:number = 10; //Sayfa da başlangıç olarak 10 tane gösterilsin diyorum
   private userPostData:{"access_token":"","token_type":"","expires_in":""};
   constructor(public http: HttpClient) {

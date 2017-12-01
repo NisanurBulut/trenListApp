@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-let apiUrlBase = 'http://localhost:50572/api/data/';
+
 /*
   Generated class for the CihazdServiceProvider provider.
 
@@ -9,6 +9,7 @@ let apiUrlBase = 'http://localhost:50572/api/data/';
 */
 @Injectable()
 export class CihazdServiceProvider {
+  private apiUrlBase = 'http://vkbanalizapi.somee.com/api/data/';
   cihazdPostData:{"access_token":"","token_type":"","expires_in":"","trenId":""};
   constructor(public http: HttpClient) {
     const data = JSON.parse(localStorage.getItem('tokenData'));
@@ -18,7 +19,7 @@ export class CihazdServiceProvider {
   getDataforCD(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
      return new Promise((resolve, reject) => {
        this.http.get(
-         apiUrlBase+type, //server adress
+         this.apiUrlBase+type, //server adress
          {
            headers: {
           'Content-Type': 'application/json; charset=utf-8',

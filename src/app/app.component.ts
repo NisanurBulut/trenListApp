@@ -34,7 +34,6 @@ export class MyApp {
      ) {
       this.pages=[
         { title: 'Tren Listesi', name: 'Tren', component: TrenPage,  index: 0, icon: 'attach' },
-        { title: 'Cihaz Listesi', name: 'Cihaz', component: TrenDetailPage,  index: 1, icon: 'attach' },
         { title: 'Oturum Kapat', name: 'LoginPage', component:LoginPage, icon: 'log-out', logsOut: true }
       ];
     

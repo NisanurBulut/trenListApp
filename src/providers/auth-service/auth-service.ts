@@ -3,7 +3,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
 @Injectable()
 export class AuthServiceProvider {
-  private apiUrlBase = 'http://localhost:50572/';
+  private apiUrlBase = 'http://vkbanalizapi.somee.com/';
   constructor(public http: HttpClient, private netProvider:NetworkDetectProvider) {
     console.log('Provider Yüklendi');
   }
@@ -18,6 +18,7 @@ export class AuthServiceProvider {
           resolve(JSON.stringify(res));
        
         }, (err) => {
+          console.log(err);
           this.netProvider.ShowAlert(err.name, err.message);  
           reject(err);
         });
@@ -29,13 +30,16 @@ export class AuthServiceProvider {
       this.http.post(this.apiUrlBase+type, //server adress
         credentials, //Gönderilen veriler
         {
-        headers: new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded'), //header bilgileri
+        headers: {'Content-Type':'application/x-www-form-urlencoded',
+                  "Access-Control-Allow-Origin": "*",
+                  "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"} //header bilgileri
       })
         .subscribe(res => {        
           resolve(JSON.stringify(res));
           localStorage.setItem('userData', JSON.stringify(JSON.stringify(res)));
          
         }, (err) => {   
+        console.log(err);
           this.netProvider.ShowAlert(err.name, err.message);    
           reject(err);
         });

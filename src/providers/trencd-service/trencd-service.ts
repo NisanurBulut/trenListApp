@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-let apiUrlBase = 'http://localhost:50572/api/data/';
+
 
 /*
   Generated class for the TrencdServiceProvider provider.
@@ -10,6 +10,7 @@ let apiUrlBase = 'http://localhost:50572/api/data/';
 */
 @Injectable()
 export class TrencdServiceProvider {
+  private apiUrlBase = 'http://vkbanalizapi.somee.com/api/data/';
   cihazPostData:{"access_token":"","token_type":"","expires_in":"","trenId":""};
   constructor(public http: HttpClient) {
     const data = JSON.parse(localStorage.getItem('tokenData'));
@@ -20,7 +21,7 @@ export class TrencdServiceProvider {
     console.log(credentials);//veri alıyorum
      return new Promise((resolve, reject) => {
        this.http.get(
-         apiUrlBase+type, //server adress
+         this.apiUrlBase+type, //server adress
          {
            headers: {
           'Content-Type': 'application/json; charset=utf-8',
