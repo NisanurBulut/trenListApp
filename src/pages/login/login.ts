@@ -24,22 +24,18 @@ export class LoginPage {
     public authService:AuthServiceProvider,
     public menu: MenuController,
     private netProvider:NetworkDetectProvider,
-    private currenUser:User
-  ) {  
-    this.netProvider.isOnline();
+    private currenUser:User) {  
     this.menu.enable(false);
-    this.netProvider.checkConnection();
   }
-   ionViewDidLoad() {
-   this.netProvider.checkConnection();
+  ionViewDidEnter() {
+    this.netProvider.CheckConnection();
   }
 
   login(form: NgForm) {
     this.submitted = true;
     if (form.valid) {
-      //if(this.netProvider.isOnline()){
+      if(this.netProvider.getConnectionStatus()){
       var data = "username=" + this.userData.UserName + "&password="+this.userData.Password+"&grant_type=password";
-      this.netProvider.checkConnection();
       this.authService.postDataforLogin(data,"token").then((result) => {
         this.responseData=result;   
         this.tokenData=JSON.parse(this.responseData); 
@@ -56,7 +52,7 @@ export class LoginPage {
        //Serverdan gelen hata serviste alert edilir
       });
     }
-  //}
+  }
   }
   logout(): void {
     this.currenUser.setisAuthenticated(false);
@@ -69,25 +65,8 @@ signup()
   //SignupPage page link
   this.navCtrl.push(SignupPage);
 }
-
-addConnectivityListeners(){
-  
-     let onOnline = () => {
-  
-      setTimeout(() => {
-      console.log("net var");
-      }, 2000);
- 
-       };
-  
-     let onOffline = () => {
-    console.log("net yok");
-     };
-  
-     document.addEventListener('online', onOnline, false);
-     document.addEventListener('offline', onOffline, false);
-  
-   }
- 
+ionViewWillLeave(){
+  this.netProvider.leaveNetworkSubscribe();
+}
 
 }

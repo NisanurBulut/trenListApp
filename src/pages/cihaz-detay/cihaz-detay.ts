@@ -17,9 +17,9 @@ export class CihazDetayPage {
     public netProvider:NetworkDetectProvider) {
     //Http isteği yapacağız
     this.datacihazd=this.navParams.data;
-    if(this.netProvider.isOnline()){//Online mı değil mi
+   
     this.getCihazDetayList();
-    }
+    
   }
   getCihazDetayList() {
     this.cihazdetayervice.getDataforCD(this.datacihazd, 'ListCihazDetay')
@@ -31,7 +31,7 @@ export class CihazDetayPage {
       });
   }
   ionViewDidLoad() {
-   this.netProvider.isOffline();
+   
   }
 
 }

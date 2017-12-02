@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { App } from 'ionic-angular/components/app/app';
 import {TrencdServiceProvider} from '../../providers/trencd-service/trencd-service'
 import { CihazDetayPage } from '../cihaz-detay/cihaz-detay';
-import { ControlContainer } from '@angular/forms/src/directives/control_container';
 import { NetworkDetectProvider } from '../../providers/network-detect/network-detect';
 
 /**
@@ -27,12 +26,12 @@ export class CihazPage {
     public netProvider:NetworkDetectProvider,
     public app: App)
     {
-      if(this.netProvider.isOffline()){//Online mı değil mi
+     
      //Tren sayfasından gelen detayları listelenecel olan
     this.TrenData=this.navParams.data
     //setlendi
     this.getCihazList(this.TrenData);
-      }
+      
    }
    public setdtcihazList(dataset:any)
    {
@@ -75,10 +74,10 @@ export class CihazPage {
  }
  goToCihazDetail(tcihaz:any)
  {
-  if(this.netProvider.isOffline()){//Online mı değil mi
+ 
     //Tren sayfasından gelen detayları listelenecel olan
    this.navCtrl.push(CihazDetayPage,tcihaz);
-  }
+  
  }
    ionViewDidLoad() {
      console.log('ionViewDidLoad TrenDetailPage');

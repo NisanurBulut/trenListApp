@@ -1,57 +1,55 @@
 
-import { Injectable } from '@angular/core';
+import { Injectable, state } from '@angular/core';
 import { Network } from '@ionic-native/network';
-import { Platform,AlertController} from 'ionic-angular';
+import { Platform,AlertController,ToastController } from 'ionic-angular';
 import { HttpClient,HttpResponse } from '@angular/common/http';
+import { Subscription} from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
-
-declare var navigator: any;
-declare var Connection: any;
-/*
-  Generated class for the NetworkDetectProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
-export class NetworkDetectProvider {
-  onDevice: boolean;
-  
+export class NetworkDetectProvider { 
+  private connected: Subscription;
+  private disconnected: Subscription;
+  private status:boolean=true;
    constructor(private platform: Platform, 
     private network:Network,
-    private alertCtrl:AlertController){
-     this.onDevice = this.platform.is('cordova');
-     console.log(this.onDevice);
-   }
-  
-   isOnline() {
-    
-   }
-  
-   isOffline():boolean {
-    this.network.onDisconnect().subscribe(data => {
-      console.log(data);
-      return true;
-    }, error => console.error(error));
-    return false;
+    private alertCtrl:AlertController,
+    private toast: ToastController){
+      Observable.merge(this.network.onConnect(), network.onDisconnect())
+      .subscribe(e => console.log(e), err => console.error(err)); 
+      this.CheckConnection();
+      this.platform.ready().then(() => {     
+    });
    }
    displayNetworkUpdate(connectionState: string){
     let networkType = this.network.type;
-    this.ShowAlert('You are now ${connectionState} via ${networkType','');
-    
+    this.toast.create({
+      message: 'You are now ${connectionState} via ${networkType}',
+      duration: 3000
+    }).present();
   }
-   checkConnection(){
-    this.network.onchange().subscribe(() => {
-      switch (this.network.type) {
-        case '2g':
-          console.log('probably not very fast ...');        
-          break;
-        case 'wifi':
-          console.log('wohoo wifi ...');
-          break;
-      }
-    });
+  CheckConnection():void
+  {
+    this.connected = this.network.onConnect().subscribe(data => {
+      console.log(data)
+      this.status=true;
+      this.displayNetworkUpdate(data.type);
+    }, error => console.error(error));
+   console.log(this.status);
+    this.disconnected = this.network.onDisconnect().subscribe(data => {
+      console.log(data)
+      this.status=false;
+      this.displayNetworkUpdate(data.type);
+    }, error => console.error(error));
+  }
+   getConnectionStatus():boolean{  
+     console.log(this.status);
+     return this.status;
    }
+  leaveNetworkSubscribe():void{
+    this.connected.unsubscribe();
+    this.disconnected.unsubscribe();
+  }
    PrepareAlert(err:Response)
    {
 switch(err["status"])

@@ -25,10 +25,10 @@ export class TrenPage  {
       public menu: MenuController,
       private netProvider:NetworkDetectProvider){  
       this.menu.enable(true);//menü aktif edilir    
-      if(this.netProvider.isOnline()){//Online mı değil mi
+      
       this.tlStart=0;
       this.getTrenList(this.tlStart);//Sayfa yüklenirken 0 değeriyle alıyorum
-      }    
+     
   }
   ionViewDidLoad() {
     console.log("view");
