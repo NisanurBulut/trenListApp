@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController,MenuController } from 'ionic-angular';
-import { ERR_CORDOVA_NOT_AVAILABLE } from '@ionic-native/core';
+//import { ERR_CORDOVA_NOT_AVAILABLE } from '@ionic-native/core';
 import {AuthServiceProvider} from '../../providers/auth-service/auth-service';
 import { SignupPage } from '../signup/signup';
-import { enableDebugTools } from '@angular/platform-browser/src/browser/tools/tools';
+//import { enableDebugTools } from '@angular/platform-browser/src/browser/tools/tools';
 import { NgForm } from '@angular/forms';
 import { TrenPage } from '../tren/tren';
 import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';

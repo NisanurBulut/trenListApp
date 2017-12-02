@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
-import { User } from '../../models/user-model';
 @Injectable()
 export class AuthServiceProvider {
   private apiUrlBase = 'http://vkbanalizapi.somee.com/';

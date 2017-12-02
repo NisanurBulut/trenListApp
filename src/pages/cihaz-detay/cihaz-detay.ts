@@ -15,23 +15,23 @@ export class CihazDetayPage {
      public navParams: NavParams,
      public cihazdetayervice:CihazdServiceProvider,
     public netProvider:NetworkDetectProvider) {
-    //Http isteği yapacağız
+
     this.datacihazd=this.navParams.data;
-   
+    if(this.netProvider.getConnectionStatus()){
     this.getCihazDetayList();
+    }
     
+  }
+  ionViewDidEnter() {
+    this.netProvider.CheckConnection();
   }
   getCihazDetayList() {
     this.cihazdetayervice.getDataforCD(this.datacihazd, 'ListCihazDetay')
       .then((result) => {
         this.dataSetCD = result;
-       console.log(this.dataSetCD);
       }, (err) => {
 
       });
   }
-  ionViewDidLoad() {
-   
-  }
-
+ 
 }

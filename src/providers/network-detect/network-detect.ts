@@ -1,17 +1,16 @@
-
-import { Injectable, state } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Network } from '@ionic-native/network';
-import { Platform,AlertController,ToastController } from 'ionic-angular';
+import { AlertController,ToastController } from 'ionic-angular';
 import { HttpClient,HttpResponse } from '@angular/common/http';
 import { Subscription} from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
+//import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class NetworkDetectProvider { 
   private connected: Subscription;
   private disconnected: Subscription;
   private status:boolean=undefined;
-   constructor(private platform: Platform, 
+   constructor(
     private network:Network,
     private alertCtrl:AlertController,
     private toast: ToastController){      
@@ -24,7 +23,7 @@ export class NetworkDetectProvider {
       duration: 3000
     }).present();
   }
-  CheckConnection():void
+  CheckConnection():void //Değişimle çalışıyor
   {
     this.connected = this.network.onConnect().subscribe(data => {
       this.setConnectionStatus();
@@ -35,18 +34,18 @@ export class NetworkDetectProvider {
       this.displayNetworkUpdate("İnternet Bağlantınız Bulunmamaktadır.");
     }, error => console.error(error));
   }
-  setConnectionStatus()
+  setConnectionStatus() //Bunu constructor ile almam gerekir ?
   {
     this.status=navigator.onLine;
+    console.log("setCon",this.status);
   }
    getConnectionStatus():boolean{  //Bunu fonksiyonlar için kullanıyorum
     console.log(this.status);
      return this.status;
    }
-  leaveNetworkSubscribe():void{
+    leaveNetworkSubscribe():void{
     this.connected.unsubscribe();
     this.disconnected.unsubscribe();
-    this.status=undefined;
   }
    PrepareAlert(err:Response)
   {

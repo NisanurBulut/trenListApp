@@ -29,7 +29,7 @@ export class CihazPage {
      //Tren sayfasından gelen detayları listelenecel olan
     this.TrenData=this.navParams.data
     //setlendi
-    if(this.netProvider.getConnectionStatus()){
+    if(this.netProvider.getConnectionStatus()){ //Sayfaya cihazlar yüklenmeden evvel network bağlantısı kontrol edilir
     this.getCihazList(this.TrenData);
   }
   
@@ -81,9 +81,6 @@ export class CihazPage {
    if(this.netProvider.getConnectionStatus()){ //Detay Sayfasına Gitmeden evvel kontrol ediyoruz
     //Tren sayfasından gelen detayları listelenecel olan
    this.navCtrl.push(CihazDetayPage,tcihaz);
-  }
-  else{
-    this.netProvider.displayNetworkUpdate("İnternet Bağlantınız Bulunmamaktadır");
   }
  }
  }

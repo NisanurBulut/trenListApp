@@ -26,12 +26,13 @@ export class TrenPage  {
       private netProvider:NetworkDetectProvider){  
       this.menu.enable(true);//menü aktif edilir          
       this.tlStart=0;
+      this.netProvider.setConnectionStatus();
       if(this.netProvider.getConnectionStatus()){
       this.getTrenList(this.tlStart);//Sayfa yüklenirken 0 değeriyle alıyorum
       }
   }
   ionViewDidEnter() {
-    this.netProvider.CheckConnection();
+    this.netProvider.CheckConnection(); //Uygulama yüklenirken kontrol ediyorum
   }
    // ion input fire oldukça filter çalışssın :)
    searchFn(ev: any) {
@@ -57,14 +58,14 @@ export class TrenPage  {
   }
 
   doInfinite(infiniteScroll:any): Promise<any> {
-    console.log('doInfinite, start is currently '+this.tlStart);
+    if(this.netProvider.getConnectionStatus()){
     this.tlStart+=10;  
       return new Promise((resolve) => {
         setTimeout(() => {
           this.getTrenList(this.tlStart)
           .then((result) => { 
             if(result==false)//Veri kalmamış ise scroll işlemini durduryorum
-            {   console.log(result);          
+            {       
               infiniteScroll.enable=false;
               infiniteScroll.complete();//Scroll işlemi tamamlandı
               this.statusScroll=false;
@@ -75,6 +76,7 @@ export class TrenPage  {
           resolve();
         }, 500);
       })
+    }
     }
   
   goToTrenDetail(trenData:any)
@@ -90,5 +92,7 @@ export class TrenPage  {
      const root = this.app.getRootNav();
      root.popToRoot();
   }
-
+  ionViewWillLeave(){
+    this.netProvider.leaveNetworkSubscribe();//View den ayrılırken boşver 
+    }
 }
