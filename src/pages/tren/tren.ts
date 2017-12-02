@@ -24,14 +24,15 @@ export class TrenPage  {
       public app: App,
       public menu: MenuController,
       private netProvider:NetworkDetectProvider){  
-      this.menu.enable(true);//menü aktif edilir    
-      
+      this.menu.enable(true);//menü aktif edilir          
       this.tlStart=0;
+      console.log("trenconstructor");
+      if(this.netProvider.getConnectionStatus()){
       this.getTrenList(this.tlStart);//Sayfa yüklenirken 0 değeriyle alıyorum
-     
+      }
   }
-  ionViewDidLoad() {
-    console.log("view");
+  ionViewDidEnter() {
+    this.netProvider.CheckConnection();
   }
    // ion input fire oldukça filter çalışssın :)
    searchFn(ev: any) {
@@ -79,13 +80,13 @@ export class TrenPage  {
   
   goToTrenDetail(trenData:any)
   {
-    //buraya bir isonline atalım
+    if(this.netProvider.getConnectionStatus()){ //Detay Sayfasına Gitmeden evvel kontrol ediyoruz
     this.navCtrl.push(CihazPage,trenData);
+  }
   }
   backToPage(){
      const root = this.app.getRootNav();
      root.popToRoot();
   }
 
-  
 }

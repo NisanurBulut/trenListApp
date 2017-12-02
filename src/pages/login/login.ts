@@ -18,7 +18,7 @@ export class LoginPage {
   userData = {"UserName":"","Password": ""};
   submitted = false;
   responseData : any;
-  tokenData={"access_token":"","token_type":"","expires_in":""}
+  tokenData={"access_token":"","token_type":"","expires_in":""} //Bunu Silme
   constructor(
     public navCtrl:NavController,
     public authService:AuthServiceProvider,
@@ -52,12 +52,16 @@ export class LoginPage {
        //Serverdan gelen hata serviste alert edilir
       });
     }
+    else{
+      this.netProvider.displayNetworkUpdate("İnternet Bağlantınız Bulunmamaktadır");
+    }
   }
   }
   logout(): void {
     this.currenUser.setisAuthenticated(false);
     this.currenUser=undefined;
     localStorage.clear();
+    this.netProvider.leaveNetworkSubscribe();
     console.log(this.currenUser);
   };
 signup()
@@ -65,8 +69,4 @@ signup()
   //SignupPage page link
   this.navCtrl.push(SignupPage);
 }
-ionViewWillLeave(){
-  this.netProvider.leaveNetworkSubscribe();
-}
-
 }

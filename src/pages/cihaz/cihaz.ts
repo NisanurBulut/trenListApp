@@ -21,18 +21,22 @@ export class CihazPage {
   private TrenData={"TrenAd":"","TrenAId":""};
   private dataSetTCihaz:any;
    constructor(public navCtrl: NavController,
-     public navParams: NavParams,
+    public navParams: NavParams,
     public trencdservice:TrencdServiceProvider,
     public netProvider:NetworkDetectProvider,
     public app: App)
-    {
-     
+    {    
      //Tren sayfasından gelen detayları listelenecel olan
     this.TrenData=this.navParams.data
     //setlendi
+    if(this.netProvider.getConnectionStatus()){
     this.getCihazList(this.TrenData);
-      
+  }
+  
    }
+   ionViewDidEnter() {
+    this.netProvider.CheckConnection();
+  }
    public setdtcihazList(dataset:any)
    {
  this.dataSetTCihaz=dataset;
@@ -74,14 +78,13 @@ export class CihazPage {
  }
  goToCihazDetail(tcihaz:any)
  {
- 
+   if(this.netProvider.getConnectionStatus()){ //Detay Sayfasına Gitmeden evvel kontrol ediyoruz
     //Tren sayfasından gelen detayları listelenecel olan
    this.navCtrl.push(CihazDetayPage,tcihaz);
-  
+  }
+  else{
+    this.netProvider.displayNetworkUpdate("İnternet Bağlantınız Bulunmamaktadır");
+  }
  }
-   ionViewDidLoad() {
-     console.log('ionViewDidLoad TrenDetailPage');
-   }
- 
  }
  

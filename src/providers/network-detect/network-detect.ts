@@ -10,48 +10,46 @@ import { Observable } from 'rxjs/Observable';
 export class NetworkDetectProvider { 
   private connected: Subscription;
   private disconnected: Subscription;
-  private status:boolean=true;
+  private status:boolean=undefined;
    constructor(private platform: Platform, 
     private network:Network,
     private alertCtrl:AlertController,
-    private toast: ToastController){
-      Observable.merge(this.network.onConnect(), network.onDisconnect())
-      .subscribe(e => console.log(e), err => console.error(err)); 
-      this.CheckConnection();
-      this.platform.ready().then(() => {     
-    });
+    private toast: ToastController){      
+      this.setConnectionStatus();
    }
-   displayNetworkUpdate(connectionState: string){
+   displayNetworkUpdate(_message:string){
     let networkType = this.network.type;
     this.toast.create({
-      message: 'You are now ${connectionState} via ${networkType}',
+      message: _message,
       duration: 3000
     }).present();
   }
   CheckConnection():void
   {
     this.connected = this.network.onConnect().subscribe(data => {
-      console.log(data)
-      this.status=true;
-      this.displayNetworkUpdate(data.type);
+      this.setConnectionStatus();
+      this.displayNetworkUpdate("İnternet Bağlantısı Sağlandı"); 
     }, error => console.error(error));
-   console.log(this.status);
-    this.disconnected = this.network.onDisconnect().subscribe(data => {
-      console.log(data)
-      this.status=false;
-      this.displayNetworkUpdate(data.type);
+    this.disconnected = this.network.onDisconnect().subscribe(data => {     
+      this.setConnectionStatus();//Bağlantı durumu değiştikçe setle
+      this.displayNetworkUpdate("İnternet Bağlantınız Bulunmamaktadır.");
     }, error => console.error(error));
+    console.log("checkConnection",this.status);
   }
-   getConnectionStatus():boolean{  
-     console.log(this.status);
+  setConnectionStatus()
+  {
+    this.status=navigator.onLine;
+  }
+   getConnectionStatus():boolean{  //Bunu fonksiyonlar için kullanıyorum
      return this.status;
    }
   leaveNetworkSubscribe():void{
     this.connected.unsubscribe();
     this.disconnected.unsubscribe();
+    this.status=undefined;
   }
    PrepareAlert(err:Response)
-   {
+  {
 switch(err["status"])
 {
 case 400:
@@ -74,7 +72,7 @@ this.ShowAlert(err["name"],err["message"]);
 break;
 }
    }
-   ShowAlert(_title:string,_message:string){
+   ShowAlert(_title:string,_message:string):void{
     let alert=this.alertCtrl.create({
       title:_title,
       subTitle:_message,
