@@ -34,13 +34,13 @@ export class NetworkDetectProvider {
       this.setConnectionStatus();//Bağlantı durumu değiştikçe setle
       this.displayNetworkUpdate("İnternet Bağlantınız Bulunmamaktadır.");
     }, error => console.error(error));
-    console.log("checkConnection",this.status);
   }
   setConnectionStatus()
   {
     this.status=navigator.onLine;
   }
    getConnectionStatus():boolean{  //Bunu fonksiyonlar için kullanıyorum
+    console.log(this.status);
      return this.status;
    }
   leaveNetworkSubscribe():void{

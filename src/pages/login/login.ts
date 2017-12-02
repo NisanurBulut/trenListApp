@@ -64,6 +64,9 @@ export class LoginPage {
     this.netProvider.leaveNetworkSubscribe();
     console.log(this.currenUser);
   };
+  ionViewWillLeave(){
+  this.netProvider.leaveNetworkSubscribe();
+  }
 signup()
 {
   //SignupPage page link

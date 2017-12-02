@@ -26,7 +26,6 @@ export class TrenPage  {
       private netProvider:NetworkDetectProvider){  
       this.menu.enable(true);//menü aktif edilir          
       this.tlStart=0;
-      console.log("trenconstructor");
       if(this.netProvider.getConnectionStatus()){
       this.getTrenList(this.tlStart);//Sayfa yüklenirken 0 değeriyle alıyorum
       }
@@ -82,6 +81,9 @@ export class TrenPage  {
   {
     if(this.netProvider.getConnectionStatus()){ //Detay Sayfasına Gitmeden evvel kontrol ediyoruz
     this.navCtrl.push(CihazPage,trenData);
+  }
+  else{
+    this.netProvider.displayNetworkUpdate("İnternet Bağlantınız Bulunmamaktadır");
   }
   }
   backToPage(){
