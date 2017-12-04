@@ -1,17 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-angular';
 import { App } from 'ionic-angular/components/app/app';
 import {TrencdServiceProvider} from '../../providers/trencd-service/trencd-service'
 import { CihazDetayPage } from '../cihaz-detay/cihaz-detay';
 import { NetworkDetectProvider } from '../../providers/network-detect/network-detect';
-
-/**
- * Generated class for the CihazPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-cihaz',
@@ -20,21 +12,27 @@ import { NetworkDetectProvider } from '../../providers/network-detect/network-de
 export class CihazPage {
   private TrenData={"TrenAd":"","TrenAId":""};
   private dataSetTCihaz:any;
-   constructor(public navCtrl: NavController,
+  public load:any;
+   constructor(
+     public navCtrl: NavController,
     public navParams: NavParams,
     public trencdservice:TrencdServiceProvider,
     public netProvider:NetworkDetectProvider,
-    public app: App)
-    {    
+    public app: App,
+    private loadingCtrl: LoadingController)
+    {   
+     
      //Tren sayfasından gelen detayları listelenecel olan
     this.TrenData=this.navParams.data;
     //setlendi
     if(this.netProvider.getConnectionStatus()){ //Sayfaya cihazlar yüklenmeden evvel network bağlantısı kontrol edilir
     this.getCihazList(this.TrenData);
+
   }
   
    }
    ionViewDidEnter() {
+
     this.netProvider.CheckConnection();
   }
    public setdtcihazList(dataset:any)
@@ -65,10 +63,13 @@ export class CihazPage {
  });
    }
  getCihazList(_trenData:any)
- {
+ { 
+   this.netProvider.presentSpinner(); 
  this.trencdservice.getCihazList(_trenData, 'ListCihaz')
  .then((result) => {
+  
    this.setdtcihazList(result);
+   this.netProvider.dismissSpinner();
  }, (err) => {
  
  });

@@ -5,9 +5,6 @@ import { App } from 'ionic-angular/components/app/app';
 import { TrenlistServiceProvider } from '../../providers/trenlist-service/trenlist-service';
 import { NetworkDetectProvider } from '../../providers/network-detect/network-detect';
 import { CihazPage } from '../cihaz/cihaz';
-
-
-
 @IonicPage()
 @Component({
   selector: 'page-tren',
@@ -24,11 +21,13 @@ export class TrenPage  {
       public app: App,
       public menu: MenuController,
       private netProvider:NetworkDetectProvider){  
+        this.netProvider.presentSpinner();
       this.menu.enable(true);//menü aktif edilir          
       this.tlStart=0;
       this.netProvider.setConnectionStatus();
       if(this.netProvider.getConnectionStatus()){
-      this.getTrenList(this.tlStart);//Sayfa yüklenirken 0 değeriyle alıyorum
+      this.getTrenList(this.tlStart);//Sayfa yüklenirken 0 değeriyle alıyorum 
+      this.netProvider.dismissSpinner();
       }
   }
   ionViewDidEnter() {
@@ -44,17 +43,19 @@ export class TrenPage  {
       .then((result) => {  
         if(result!=null)
         {
-          this.dataSetTrenL=this.dataSetTrenL.concat(result);//Apiden gelen verileri birleştirme
-          resolve(true);      
+          this.dataSetTrenL=this.dataSetTrenL.concat(result);//Apiden gelen verileri birleştirme       
+          resolve(true);             
         } 
-        else{
-          resolve(false); //scroll dursun
+        else{         
+          resolve(false); //scroll dursun       
         }          
           
       }, (err) => {
         this.netProvider.PrepareAlert(err); //sunucudan dönen  hatayı gösterelim
-              });           
-    })
+              });   
+           this.netProvider.dismissSpinner();   
+    });
+
   }
 
   doInfinite(infiniteScroll:any): Promise<any> {

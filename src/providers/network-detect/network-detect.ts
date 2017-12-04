@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Network } from '@ionic-native/network';
-import { AlertController,ToastController } from 'ionic-angular';
+import { AlertController,ToastController,LoadingController} from 'ionic-angular';
 import { HttpClient,HttpResponse } from '@angular/common/http';
 import { Subscription} from 'rxjs/Subscription';
+import { Loading } from 'ionic-angular/components/loading/loading';
+import { LoadingOptions } from 'ionic-angular/components/loading/loading-options';
+import { NavController } from 'ionic-angular/navigation/nav-controller';
+import { ViewController } from 'ionic-angular/navigation/view-controller';
 //import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -10,12 +14,26 @@ export class NetworkDetectProvider {
   private connected: Subscription;
   private disconnected: Subscription;
   private status:boolean=undefined;
+
+  private loading:Loading;
    constructor(
     private network:Network,
     private alertCtrl:AlertController,
-    private toast: ToastController){      
+    private toast: ToastController,
+    private loaderCtrl:LoadingController){   
+     
       this.setConnectionStatus();
    }
+   presentSpinner() {
+    this.loading = this.loaderCtrl.create({content:'Lütfen Bekleyin...'});
+    this.loading.present();
+  }
+
+  dismissSpinner() {
+  
+      this.loading.dismiss();
+    
+  }
    displayNetworkUpdate(_message:string){
     let networkType = this.network.type;
     this.toast.create({
@@ -77,5 +95,5 @@ break;
    });
    alert.present();
    }
-  
+
 }

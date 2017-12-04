@@ -26,12 +26,14 @@ export class CihazDetayPage {
     this.netProvider.CheckConnection();
   }
   getCihazDetayList() {
+    this.netProvider.presentSpinner();
     this.cihazdetayervice.getDataforCD(this.datacihazd, 'ListCihazDetay')
       .then((result) => {
         this.dataSetCD = result;
       }, (err) => {
 
       });
+      this.netProvider.dismissSpinner();
   }
  
 }
