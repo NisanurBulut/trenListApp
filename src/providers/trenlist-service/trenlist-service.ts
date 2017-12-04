@@ -6,7 +6,6 @@ import {NetworkDetectProvider} from '../../providers/network-detect/network-dete
 @Injectable()
 export class TrenlistServiceProvider {
   private apiUrlBase = 'http://vkbanalizapi.somee.com/api/data/';
-  perpage:number = 10; //Sayfa da başlangıç olarak 10 tane gösterilsin diyorum
   constructor(public http: HttpClient, private currentUser:User, private netProvider:NetworkDetectProvider) { //tanımlama yapmamla bırlıkte cekiyor
   console.log(this.currentUser);
   }

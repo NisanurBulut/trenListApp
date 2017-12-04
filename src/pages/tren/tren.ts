@@ -59,7 +59,7 @@ export class TrenPage  {
 
   doInfinite(infiniteScroll:any): Promise<any> {
     if(this.netProvider.getConnectionStatus()){
-    this.tlStart+=10;  
+    this.tlStart+=20;  
       return new Promise((resolve) => {
         setTimeout(() => {
           this.getTrenList(this.tlStart)
