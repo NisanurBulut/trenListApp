@@ -15,12 +15,16 @@
 
 
 <ion-content padding>
-    <ion-item-sliding inset *ngFor="let tcihaz  of dataSetTCihaz">  
-       
-        <button ion-item (click)="goToCihazDetail(tcihaz)">            
-              <p class="csv-date">Son Verilme Tarihi: {{tcihaz.CSonVeriTar | date: "dd/MM/yyyy H:mm"}}</p>
-              <p class="bold">{{tcihaz.CAd}} <ion-icon name="{{tcihaz.iconString}}"></ion-icon></p>             
-        </button>             
-      </ion-item-sliding>
+  <ion-list inset *ngFor="let tcihaz  of dataSetTCihaz">
 
+    <button ion-item  (click)="goToCihazDetail(tcihaz)">
+        <ion-icon name="{{tcihaz.iconString}}" item-left></ion-icon>
+      
+        <div class="item-note" item-left>
+          <b text-wrap *ngIf="tcihaz">{{tcihaz.CAd}}</b>
+            <p class="csv-date" *ngIf="tcihaz">Son Verilme Tarihi: {{tcihaz.CSonVeriTar | date: "dd/MM/yyyy H:mm"}}</p>
+        </div>
+      </button>
+
+    </ion-list>
 </ion-content>

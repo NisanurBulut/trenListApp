@@ -7,7 +7,6 @@ import {NetworkDetectProvider} from '../../providers/network-detect/network-dete
 export class TrenlistServiceProvider {
   private apiUrlBase = 'http://vkbanalizapi.somee.com/api/data/';
   constructor(public http: HttpClient, private currentUser:User, private netProvider:NetworkDetectProvider) { //tanımlama yapmamla bırlıkte cekiyor
-  console.log(this.currentUser);
   }
   getDataforCL(tpLength) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
     return new Promise((resolve, reject) => {
@@ -22,8 +21,7 @@ export class TrenlistServiceProvider {
         params:{'id':tpLength}
       })
       .subscribe(data => {       
-          resolve(data);
-          console.log(data);        
+          resolve(data);       
         }, (err) => {
           console.log(err);
           this.netProvider.PrepareAlert(err);    

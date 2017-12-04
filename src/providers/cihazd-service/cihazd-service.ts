@@ -7,7 +7,6 @@ export class CihazdServiceProvider {
   private apiUrlBase = 'http://vkbanalizapi.somee.com/api/data/';
   constructor(public http: HttpClient,private currentUser:User,private netProvider:NetworkDetectProvider) {
     const data = JSON.parse(localStorage.getItem('currentUser'));
-    console.log(this.currentUser);
   }
   getDataforCD(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
      return new Promise((resolve, reject) => {

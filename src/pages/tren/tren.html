@@ -13,14 +13,14 @@
     </ion-toolbar>
   </ion-header>
   
-
   <ion-content padding>
-         <ion-list>
-           <ion-item-sliding *ngFor="let tren  of dataSetTrenL | searchTren: term">
-              <button ion-item text-center (click)="goToTrenDetail(tren)"> 
-                  <ion-label>{{tren.TrenAd}}</ion-label>                                   
-                </button>
-           </ion-item-sliding>                  
+         <ion-list *ngFor="let tren  of dataSetTrenL | searchTren: term">
+              <button ion-item (click)="goToTrenDetail(tren)" >
+                  <h5 text-center *ngIf="tren"> 
+                      <b> {{tren.TrenAd}}</b>
+                      <ion-icon item-left name="md-train"></ion-icon>         
+                    </h5>           
+                </button>                       
          </ion-list>
          <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite($event))">
           <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Yükleniyor"></ion-infinite-scroll-content>

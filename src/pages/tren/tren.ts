@@ -78,7 +78,7 @@ export class TrenPage  {
       })
     }
     }
-  
+
   goToTrenDetail(trenData:any)
   {
     if(this.netProvider.getConnectionStatus()){ //Detay Sayfasına Gitmeden evvel kontrol ediyoruz

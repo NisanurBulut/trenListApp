@@ -27,7 +27,7 @@ export class CihazPage {
     public app: App)
     {    
      //Tren sayfasından gelen detayları listelenecel olan
-    this.TrenData=this.navParams.data
+    this.TrenData=this.navParams.data;
     //setlendi
     if(this.netProvider.getConnectionStatus()){ //Sayfaya cihazlar yüklenmeden evvel network bağlantısı kontrol edilir
     this.getCihazList(this.TrenData);
@@ -51,18 +51,15 @@ export class CihazPage {
   {
      case 1:
      element.iconString="md-checkmark"; 
-     console.log(element);
      break;
      case 2:
      element.iconString="md-construct"; 
-     console.log(element);
      break;
      case 3: 
      element.iconString="md-warning"; 
-     console.log(element);
      break;
      default: 
-     console.log(element);
+     element.iconString="md-bookmark"; 
      break;
   }  
  });

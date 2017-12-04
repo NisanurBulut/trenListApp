@@ -37,10 +37,8 @@ export class NetworkDetectProvider {
   setConnectionStatus() //Bunu constructor ile almam gerekir ?
   {
     this.status=navigator.onLine;
-    console.log("setCon",this.status);
   }
    getConnectionStatus():boolean{  //Bunu fonksiyonlar için kullanıyorum
-    console.log(this.status);
      return this.status;
    }
     leaveNetworkSubscribe():void{

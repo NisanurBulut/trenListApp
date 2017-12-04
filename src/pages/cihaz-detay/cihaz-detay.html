@@ -12,10 +12,10 @@
 
 </ion-header>
 <ion-content padding="">
-    <ion-item-sliding inset *ngFor="let cdetay  of dataSetCD">
+    <ion-list inset *ngFor="let cdetay  of dataSetCD">
     <button ion-item text-wrap>            
-        <p class="csv-date">Son Verilme Tarihi: {{cdetay.DetayErisimSonTar | date: "dd/MM/yyyy H:mm"}}</p>
-        <p >{{cdetay.DetayStr}}</p>      
+        <p class="csv-date" *ngIf="cdetay">Son Verilme Tarihi: {{cdetay.DetayErisimSonTar | date: "dd/MM/yyyy H:mm"}}</p>
+        <p *ngIf="cdetay">{{cdetay.DetayStr}}</p>      
     </button>           
-    </ion-item-sliding>
+    </ion-list>
 </ion-content>
