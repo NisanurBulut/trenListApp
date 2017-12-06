@@ -21,14 +21,14 @@ export class TrenPage  {
       public app: App,
       public menu: MenuController,
       private netProvider:NetworkDetectProvider){  
-        this.netProvider.presentSpinner();
+      this.netProvider.presentSpinner();//spinner aktif olsun
       this.menu.enable(true);//menü aktif edilir          
       this.tlStart=0;
       this.netProvider.setConnectionStatus();
       if(this.netProvider.getConnectionStatus()){
       this.getTrenList(this.tlStart);//Sayfa yüklenirken 0 değeriyle alıyorum 
-      this.netProvider.dismissSpinner();
       }
+      this.netProvider.dismissSpinner();
   }
   ionViewDidEnter() {
     this.netProvider.CheckConnection(); //Uygulama yüklenirken kontrol ediyorum
@@ -53,7 +53,7 @@ export class TrenPage  {
       }, (err) => {
         this.netProvider.PrepareAlert(err); //sunucudan dönen  hatayı gösterelim
               });   
-           this.netProvider.dismissSpinner();   
+              
     });
 
   }
