@@ -1,30 +1,50 @@
-<ion-header>
+<ion-header no-border>
     <ion-navbar>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
       <ion-title>Tren Listesi</ion-title>
     </ion-navbar>
+    <ion-toolbar>
 
-      
-  <ion-toolbar no-border-top>
-      <ion-searchbar (ionInput)="searchFn($event)" placeholder="Ara"></ion-searchbar>
-   
+        <button left ion-button icon-only color="secondary">
+          <ion-icon name="md-contact"></ion-icon>Aktif Kullanıcı
+          <br>
+           {{activeuser.name}}        
+        </button>      
+      <button ion-button right icon-only text-wrap color="secondary">
+        <ion-icon name="clock"></ion-icon>Oturum Açma Zamanı
+        <br>
+      {{activeuser.sessionstime | date: 'dd/MM/yyyy HH:MM'}}
+      </button>
+    </ion-toolbar>    
+  <ion-toolbar no-border>
+      <ion-searchbar style="background-color:lightgray;" (ionInput)="searchFn($event)" placeholder="Ara">
+        </ion-searchbar> 
     </ion-toolbar>
   </ion-header>
   
   <ion-content padding>
          <ion-list inset *ngFor="let tren  of dataSetTrenL | searchTren: term">
-              <button ion-item (click)="goToTrenDetail(tren)">
-                  <h5 text-center *ngIf="tren"> 
-                      <b> {{tren.TrenAd}}</b>
-                      <ion-icon item-left name="md-train"></ion-icon>         
-                    </h5>           
-                </button>                       
+            <ion-item detail-none>
+            <button ion-item (click)="goToTrenDetail(tren)">           
+                <ion-icon name="train" item-start></ion-icon>              
+                  {{tren.TrenAd}}
+                  <ion-badge color="success" item-end>
+                      <ion-icon item-left name="checkmark"></ion-icon>
+                  </ion-badge> 
+                <ion-badge color="secondary" item-end>{{tren.countT}}
+                    <ion-icon item-left name="hammer"></ion-icon>
+                </ion-badge>                                          
+                </button>
+              </ion-item>                      
          </ion-list>
          <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite($event))">
           <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Yükleniyor"></ion-infinite-scroll-content>
         </ion-infinite-scroll>
   </ion-content>
-
-  
+  <ion-footer no-border text-wrap>
+      <ion-toolbar text-center>
+        <ion-title>Tüm hakları DualSoft Yazılım ve Eğitim Hizmetleri LTD. ile saklıdır.</ion-title>
+      </ion-toolbar>
+    </ion-footer>

@@ -4,9 +4,6 @@ import { AlertController,ToastController,LoadingController} from 'ionic-angular'
 import { HttpClient,HttpResponse } from '@angular/common/http';
 import { Subscription} from 'rxjs/Subscription';
 import { Loading } from 'ionic-angular/components/loading/loading';
-import { LoadingOptions } from 'ionic-angular/components/loading/loading-options';
-import { NavController } from 'ionic-angular/navigation/nav-controller';
-import { ViewController } from 'ionic-angular/navigation/view-controller';
 //import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -20,8 +17,7 @@ export class NetworkDetectProvider {
     private network:Network,
     private alertCtrl:AlertController,
     private toast: ToastController,
-    private loaderCtrl:LoadingController){   
-     
+    private loaderCtrl:LoadingController){       
       this.setConnectionStatus();
    }
    presentSpinner() {
@@ -69,6 +65,7 @@ switch(err["status"])
 {
 case 400:
 this.ShowAlert("İstek Hatası","Uygulama Ön Belleğini Temizleyip Tekrar Deneyiniz.");
+//this.navCtrl.setRoot('LoginPage');
 break;
 case 401:
 this.ShowAlert("Erişim Sınırlaması","Bu Alana Erişim İzniniz Bulunmamaktadır.");
@@ -81,6 +78,7 @@ this.ShowAlert("Erişim Sınırlaması","Bu Alana Erişim İzniniz Bulunmamaktad
 break;
 case 404:
 this.ShowAlert("Kayıp Adres","Erişmeye Çalıştığınız Alan Bulunamadı.");
+//this.navCtrl.setRoot('LoginPage');
 break;
 default:
 this.ShowAlert(err["name"],err["message"]);

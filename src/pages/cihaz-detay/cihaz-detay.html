@@ -11,15 +11,41 @@
   </ion-navbar>
 
 </ion-header>
-<ion-content padding="">
+
+<ion-content padding>
+ 
     <ion-list inset *ngFor="let cdetay  of dataSetCD">
-    <button ion-item text-wrap>            
-        <p class="csv-date" *ngIf="cdetay">Son Verilme Tarihi: {{cdetay.DetayErisimSonTar | date: "dd/MM/yyyy H:mm"}}</p>
-        <p *ngIf="cdetay">{{cdetay.DetayStr}}</p>      
-    </button>           
+        <ion-item ion-item ion-thumbnail >   
+          <ion-grid>
+          <ion-row  class="i-am-centered" >
+              <ion-col width-100>
+                  <ion-thumbnail>
+                      <img style="width: 100px; height: 100px;" src="assets/imgDevices/{{datacihazd.CAd}}.png">
+                    </ion-thumbnail>  
+              </ion-col>
+
+            </ion-row>  
+            <ion-row>
+              <ion-col width-100>
+                  <ion-list width-100>
+                      
+                      <ion-item width-50 text-wrap>
+                          <ion-icon item-left name="pricetag"></ion-icon>
+                          {{cdetay.DetayStr}}
+                      </ion-item>
+                      <ion-item width-50 text-wrap>
+                          <ion-icon item-left name="pricetag"></ion-icon>
+                        <p class="csv-date">Son Verilme Tarihi: {{cdetay.DetayErisimSonTar | date: "dd/MM/yyyy H:mm"}}</p>
+                      </ion-item>
+                    </ion-list>
+              </ion-col>
+            </ion-row>
+          </ion-grid>      
+        </ion-item>         
     </ion-list>
-    <div>
-        {{message}}
-    </div>
-    
 </ion-content>
+<ion-footer no-border>
+    <ion-toolbar text-center text-wrap>
+      <ion-title>Tüm hakları DualSoft Yazılım ve Eğitim Hizmetleri LTD. ile saklıdır.</ion-title>
+    </ion-toolbar>
+  </ion-footer>

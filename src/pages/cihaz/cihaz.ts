@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-angular';
-import { App } from 'ionic-angular/components/app/app';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {TrencdServiceProvider} from '../../providers/trencd-service/trencd-service'
 import { CihazDetayPage } from '../cihaz-detay/cihaz-detay';
 import { NetworkDetectProvider } from '../../providers/network-detect/network-detect';
@@ -14,20 +13,16 @@ export class CihazPage {
   private dataSetTCihaz:any;
   public load:any;
    constructor(
-     public navCtrl: NavController,
+    public navCtrl: NavController,
     public navParams: NavParams,
     public trencdservice:TrencdServiceProvider,
-    public netProvider:NetworkDetectProvider,
-    public app: App,
-    private loadingCtrl: LoadingController)
-    {   
-     
+    public netProvider:NetworkDetectProvider)
+    {     
      //Tren sayfasından gelen detayları listelenecel olan
     this.TrenData=this.navParams.data;
     //setlendi
     if(this.netProvider.getConnectionStatus()){ //Sayfaya cihazlar yüklenmeden evvel network bağlantısı kontrol edilir
     this.getCihazList(this.TrenData);
-
   }
   
    }
@@ -45,19 +40,27 @@ export class CihazPage {
   writable : true,
   enumerable : true,
   configurable : true});
+  Object.defineProperty(element, "iconColor", {value : '',
+  writable : true,
+  enumerable : true,
+  configurable : true});
   switch (element.CDurum)
   {
      case 1:
      element.iconString="md-checkmark"; 
+     element.iconColor="success";
      break;
      case 2:
      element.iconString="md-construct"; 
+     element.iconColor="energy";
      break;
      case 3: 
      element.iconString="md-warning"; 
+     element.iconColor="danger";
      break;
      default: 
-     element.iconString="md-bookmark"; 
+     element.iconString="md-bookmark";
+     element.iconColor="blueprimary";
      break;
   }  
  });

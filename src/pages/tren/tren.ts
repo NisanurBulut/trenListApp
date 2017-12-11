@@ -5,6 +5,7 @@ import { App } from 'ionic-angular/components/app/app';
 import { TrenlistServiceProvider } from '../../providers/trenlist-service/trenlist-service';
 import { NetworkDetectProvider } from '../../providers/network-detect/network-detect';
 import { CihazPage } from '../cihaz/cihaz';
+import { User } from '../../models/user-model';
 @IonicPage()
 @Component({
   selector: 'page-tren',
@@ -16,12 +17,17 @@ export class TrenPage  {
   term: string = '';
   private statusScroll:boolean=true;
   private tlStart:number;
+  private activeuser={name:'',sessionstime:''};
     constructor(public navCtrl: NavController, 
       public trenlistservice:TrenlistServiceProvider,
       public app: App,
       public menu: MenuController,
-      private netProvider:NetworkDetectProvider){  
+      private netProvider:NetworkDetectProvider,
+     private user:User){  
       this.netProvider.presentSpinner();//spinner aktif olsun
+      this.activeuser.sessionstime=new Date().toString();
+      this.activeuser.name=this.user.getUserName();
+      console.log(this.activeuser);
       this.menu.enable(true);//menü aktif edilir          
       this.tlStart=0;
       this.netProvider.setConnectionStatus();

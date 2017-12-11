@@ -44,10 +44,9 @@ export class LoginPage {
           this.userData.Password,
           this.tokenData.access_token,
           this.tokenData.token_type,
-          true);    
+          true);   
         localStorage.setItem('currentUser', JSON.stringify(this.currenUser)); //gelen cevabı setliyorum
-        this.navCtrl.setRoot(TrenPage);
-      
+        this.navCtrl.setRoot(TrenPage);     
       }, (err) => {
        //Serverdan gelen hata serviste alert edilir
       });
@@ -55,7 +54,6 @@ export class LoginPage {
   }
   }
   logout(): void {
-    this.currenUser.setisAuthenticated(false);
     this.currenUser=undefined;
     localStorage.clear();
     this.netProvider.leaveNetworkSubscribe();

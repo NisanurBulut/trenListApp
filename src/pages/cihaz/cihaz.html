@@ -13,14 +13,23 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-list inset *ngFor="let tcihaz  of dataSetTCihaz">    
-          <button ion-item  (click)="goToCihazDetail(tcihaz)">
-              <ion-icon name="{{tcihaz.iconString}}" item-left></ion-icon>      
-              <div class="item-note" item-left>
-                <b text-wrap >{{tcihaz.CAd}}</b>
-                  <p class="csv-date">Son Verilme Tarihi: {{tcihaz.CSonVeriTar | date: "dd/MM/yyyy H:mm"}}</p>
-              </div>
-            
+  <ion-list inset *ngFor="let tcihaz  of dataSetTCihaz">   
+      <ion-item detail-none text-wrap> 
+          <button ion-item (click)="goToCihazDetail(tcihaz)">
+              <ion-badge color="{{tcihaz.iconColor}}" item-start>
+                  <ion-icon item-left name="{{tcihaz.iconString}}"></ion-icon>
+              </ion-badge> 
+              <b text-wrap >{{tcihaz.CAd}}</b>
+              <p text-wrap class="csv-date">Son Verilme Tarihi: {{tcihaz.CSonVeriTar | date: "dd/MM/yyyy H:mm"}}</p>
+              <ion-thumbnail item-left>
+                  <img src="assets/imgDevices/{{tcihaz.CAd}}.png">
+                </ion-thumbnail> 
             </button>
+            </ion-item>          
     </ion-list>
 </ion-content>
+<ion-footer no-border>
+    <ion-toolbar text-center text-wrap>
+      <ion-title>Tüm hakları DualSoft Yazılım ve Eğitim Hizmetleri LTD. ile saklıdır.</ion-title>
+    </ion-toolbar>
+  </ion-footer>

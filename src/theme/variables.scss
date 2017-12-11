@@ -7,9 +7,13 @@ $colors: (
   lightprimary:    #B5B5B7,
   light:                 #f4f4f4,
   dark:                 #222,
-  energy:             #f2b632
+  energy:             #f2b632,
+  success: #5cb85c,
+  danger:#d9534f,
+  blueprimary:#5bc0de
 );
 $toolbar-background: color($colors, primary);
+$searchbar-background-color: color($colors, light);
 @import "ionic.theme.default";
 @import "ionic.ionicons";
 @import "roboto";

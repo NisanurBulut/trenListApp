@@ -4,7 +4,7 @@ import { User } from '../../models/user-model';
 import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
 @Injectable()
 export class CihazdServiceProvider {
-  private apiUrlBase = 'http://vkbanalizapi.somee.com/api/data/';
+  private apiUrlBase = 'http://api.dualsoft.com.tr/api/data/';
   constructor(public http: HttpClient,private currentUser:User,private netProvider:NetworkDetectProvider) {
     const data = JSON.parse(localStorage.getItem('currentUser'));
   }

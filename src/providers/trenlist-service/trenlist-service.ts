@@ -5,7 +5,7 @@ import { User } from '../../models/user-model';
 import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
 @Injectable()
 export class TrenlistServiceProvider {
-  private apiUrlBase = 'http://vkbanalizapi.somee.com/api/data/';
+  private apiUrlBase = 'http://api.dualsoft.com.tr/api/data/';
   constructor(public http: HttpClient, private currentUser:User, private netProvider:NetworkDetectProvider) { //tanımlama yapmamla bırlıkte cekiyor
   }
   getDataforCL(tpLength) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method

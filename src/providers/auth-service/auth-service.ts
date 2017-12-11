@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
+
 @Injectable()
 export class AuthServiceProvider {
-  private apiUrlBase = 'http://vkbanalizapi.somee.com/';
+  private apiUrlBase = 'http://api.dualsoft.com.tr/';
   constructor(public http: HttpClient,
-  private netProvider:NetworkDetectProvider
-    ) {
-    console.log('Provider Yüklendi');
+  private netProvider:NetworkDetectProvider) {
+    
   }
   postData(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
     return new Promise((resolve, reject) => {
@@ -26,7 +26,9 @@ export class AuthServiceProvider {
     });
   }
   postDataforLogin(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
+    
     return new Promise((resolve, reject) => {
+     
       this.http.post(this.apiUrlBase+type, //server adress
         credentials, //Gönderilen veriler
         {
