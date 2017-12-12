@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {NetworkDetectProvider} from '../../providers/network-detect/network-detect';
+import { User } from '../../models/user-model';
 
 @Injectable()
 export class AuthServiceProvider {
   private apiUrlBase = 'http://api.dualsoft.com.tr/';
   constructor(public http: HttpClient,
-  private netProvider:NetworkDetectProvider) {
+  private netProvider:NetworkDetectProvider,
+private currentUser:User) {
     
   }
   postData(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
@@ -25,10 +27,9 @@ export class AuthServiceProvider {
         });
     });
   }
-  postDataforLogin(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
-    
-    return new Promise((resolve, reject) => {
-     
+
+  postDataforLogin(credentials, type) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method   
+    return new Promise((resolve, reject) => {    
       this.http.post(this.apiUrlBase+type, //server adress
         credentials, //Gönderilen veriler
         {
@@ -41,6 +42,27 @@ export class AuthServiceProvider {
         }, (err) => {   
         console.log(err);
           this.netProvider.ShowAlert(err.name, err.message);    
+          reject(err);
+        });
+    });
+  }
+  getClaimsData(token:string) { //credentials formdaki isim şifre bilgilerini tutuyor type ise method
+   
+    return new Promise((resolve, reject) => {
+      this.http.get(
+        this.apiUrlBase+'api/user/GetClaims', //server adress
+        {
+          headers: {'Content-Type': 'application/json; charset=utf-8',
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+          'Authorization':'bearer '+token    
+        } //header bilgileri
+      })
+      .subscribe(data => {       
+          resolve(data);       
+        }, (err) => {
+          console.log(err);
+          this.netProvider.PrepareAlert(err);    
           reject(err);
         });
     });

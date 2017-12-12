@@ -17,6 +17,11 @@
         <br>
       {{activeuser.sessionstime | date: 'dd/MM/yyyy HH:MM'}}
       </button>
+      <button ion-button right icon-only text-wrap color="secondary">
+        <ion-icon name="flag"></ion-icon>Yetki Seviyesi
+        <br>
+      {{activeuser.role}}
+      </button>
     </ion-toolbar>    
   <ion-toolbar no-border>
       <ion-searchbar style="background-color:lightgray;" (ionInput)="searchFn($event)" placeholder="Ara">
@@ -24,7 +29,8 @@
     </ion-toolbar>
   </ion-header>
   
-  <ion-content padding>
+  <ion-content padding class="list-content">
+    <div class="list-item-content">
          <ion-list inset *ngFor="let tren  of dataSetTrenL | searchTren: term">
             <ion-item detail-none>
             <button ion-item (click)="goToTrenDetail(tren)">           
@@ -42,6 +48,7 @@
          <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite($event))">
           <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Yükleniyor"></ion-infinite-scroll-content>
         </ion-infinite-scroll>
+      </div>
   </ion-content>
   <ion-footer no-border text-wrap>
       <ion-toolbar text-center>

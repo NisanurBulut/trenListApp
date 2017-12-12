@@ -33,6 +33,7 @@ export class MyApp {
      public netService:Network,
      public currentUser:User
      ) {
+       localStorage.clear();
       this.pages=[
         { title: 'Tren Listesi', name: 'Tren', component: TrenPage,  index: 0, icon: 'attach' },
         { title: 'Oturum Kapat', name: 'LoginPage', component:null, icon: 'log-out', }
@@ -49,10 +50,8 @@ export class MyApp {
     if(page.component) {
       this.nav.setRoot(page.component);
   } else {
-     
-      this.currentUser.setisAuthenticated(false);
+     localStorage.clear();//clear yapıldıgında nulllanıyor
       this.currentUser=undefined;
-      console.log(this.currentUser);
       this.nav.setRoot(LoginPage);
   }
    

@@ -17,17 +17,18 @@ export class TrenPage  {
   term: string = '';
   private statusScroll:boolean=true;
   private tlStart:number;
-  private activeuser={name:'',sessionstime:''};
+  private activeuser={name:'',sessionstime:'',role:''};
     constructor(public navCtrl: NavController, 
       public trenlistservice:TrenlistServiceProvider,
       public app: App,
       public menu: MenuController,
       private netProvider:NetworkDetectProvider,
-     private user:User){  
+      private user:User){  
       this.netProvider.presentSpinner();//spinner aktif olsun
       this.activeuser.sessionstime=new Date().toString();
       this.activeuser.name=this.user.getUserName();
-      console.log(this.activeuser);
+      this.activeuser.role=this.user.getRole();
+      console.log(this.user.getRole());
       this.menu.enable(true);//menü aktif edilir          
       this.tlStart=0;
       this.netProvider.setConnectionStatus();

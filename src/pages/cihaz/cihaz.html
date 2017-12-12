@@ -12,7 +12,8 @@
     <ion-title>{{TrenData.TrenAd}}'in Cihazları</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content padding class="list-content">
+    <div class="list-item-content">
   <ion-list inset *ngFor="let tcihaz  of dataSetTCihaz">   
       <ion-item detail-none text-wrap> 
           <button ion-item (click)="goToCihazDetail(tcihaz)">
@@ -22,11 +23,12 @@
               <b text-wrap >{{tcihaz.CAd}}</b>
               <p text-wrap class="csv-date">Son Verilme Tarihi: {{tcihaz.CSonVeriTar | date: "dd/MM/yyyy H:mm"}}</p>
               <ion-thumbnail item-left>
-                  <img src="assets/imgDevices/{{tcihaz.CAd}}.png">
+                  <img src="assets/imgDevices/{{tcihaz.Cid}}.png">
                 </ion-thumbnail> 
             </button>
             </ion-item>          
     </ion-list>
+    </div>
 </ion-content>
 <ion-footer no-border>
     <ion-toolbar text-center text-wrap>

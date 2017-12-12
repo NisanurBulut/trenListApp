@@ -1,11 +1,8 @@
-toolbar-title toolbar-title-ios { 
-    font-size: 1rem;
-  }
-
-  toolbar-title toolbar-title-ios { 
-    font-size: 1rem;
-  }
-
-  toolbar-title toolbar-title-ios { 
-    font-size: 1rem;
-  }
+.list-content{
+    background:color($colors,appbackground);
+}
+.list-item-content{
+    padding: 10px 10px 10px 10px;
+    margin-top: 15px;
+    background:color($colors,appitembackground);
+}

@@ -11,16 +11,15 @@
   </ion-navbar>
 
 </ion-header>
-
-<ion-content padding>
- 
+<ion-content padding class="list-content">
+    <div class="list-item-content">
     <ion-list inset *ngFor="let cdetay  of dataSetCD">
         <ion-item ion-item ion-thumbnail >   
           <ion-grid>
           <ion-row  class="i-am-centered" >
               <ion-col width-100>
                   <ion-thumbnail>
-                      <img style="width: 100px; height: 100px;" src="assets/imgDevices/{{datacihazd.CAd}}.png">
+                      <img style="width: 100px; height: 100px;" src="assets/imgDevices/{{datacihazd.Cid}}.png">
                     </ion-thumbnail>  
               </ion-col>
 
@@ -35,7 +34,7 @@
                       </ion-item>
                       <ion-item width-50 text-wrap>
                           <ion-icon item-left name="pricetag"></ion-icon>
-                        <p class="csv-date">Son Verilme Tarihi: {{cdetay.DetayErisimSonTar | date: "dd/MM/yyyy H:mm"}}</p>
+                        <p >Son Verilme Tarihi: {{cdetay.DetayErisimSonTar | date: "dd/MM/yyyy H:mm"}}</p>
                       </ion-item>
                     </ion-list>
               </ion-col>
@@ -43,6 +42,7 @@
           </ion-grid>      
         </ion-item>         
     </ion-list>
+    </div>
 </ion-content>
 <ion-footer no-border>
     <ion-toolbar text-center text-wrap>
