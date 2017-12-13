@@ -81,7 +81,12 @@ export class CihazPage {
  {
    if(this.netProvider.getConnectionStatus()){ //Detay Sayfasına Gitmeden evvel kontrol ediyoruz
     //Tren sayfasından gelen detayları listelenecel olan
-   this.navCtrl.push(CihazDetayPage,tcihaz);
+    setTimeout(() => 
+    {
+      this.navCtrl.push(CihazDetayPage,tcihaz);
+    },
+    1000);
+   
   }
  }
  }

@@ -6,41 +6,48 @@
       <ion-title>Tren Listesi</ion-title>
     </ion-navbar>
     <ion-toolbar>
-
-        <button left ion-button icon-only color="secondary">
-          <ion-icon name="md-contact"></ion-icon>Aktif Kullanıcı
-          <br>
-           {{activeuser.name}}        
-        </button>      
-      <button ion-button right icon-only text-wrap color="secondary">
-        <ion-icon name="clock"></ion-icon>Oturum Açma Zamanı
-        <br>
-      {{activeuser.sessionstime | date: 'dd/MM/yyyy HH:MM'}}
-      </button>
-      <button ion-button right icon-only text-wrap color="secondary">
-        <ion-icon name="flag"></ion-icon>Yetki Seviyesi
-        <br>
-      {{activeuser.role}}
-      </button>
+      <ion-grid>
+        <ion-row>
+          <ion-col ion-button >
+              <button class="btn" icon-only color="secondary">
+                  <ion-icon name="md-contact"></ion-icon>
+                <br/>
+                   {{activeuser.name}}        
+                </button>  
+          </ion-col>
+          <ion-col ion-button>
+              <button class="btn" icon-only text-wrap color="secondary">
+                  <ion-icon name="flag"></ion-icon>
+                  <br/>
+                {{activeuser.role}}
+                </button>
+          </ion-col>
+          <ion-col ion-button> 
+              <button class="btn" icon-only text-wrap color="secondary">
+                  <ion-icon name="clock"></ion-icon>
+                  <br/>
+                {{activeuser.sessionstime | date: 'dd/MM/yyyy HH:MM'}}
+                </button>
+          </ion-col>       
+        </ion-row>
+      </ion-grid>   
     </ion-toolbar>    
-  <ion-toolbar no-border>
+  <ion-toolbar no-border >
       <ion-searchbar style="background-color:lightgray;" (ionInput)="searchFn($event)" placeholder="Ara">
         </ion-searchbar> 
     </ion-toolbar>
   </ion-header>
-  
   <ion-content padding class="list-content">
-    <div class="list-item-content">
          <ion-list inset *ngFor="let tren  of dataSetTrenL | searchTren: term">
             <ion-item detail-none>
             <button ion-item (click)="goToTrenDetail(tren)">           
-                <ion-icon name="train" item-start></ion-icon>              
-                  {{tren.TrenAd}}
-                  <ion-badge color="success" item-end>
-                      <ion-icon item-left name="checkmark"></ion-icon>
+                <ion-icon name="train" style="zoom:1.5;" item-start></ion-icon>              
+                 <b>{{tren.TrenAd}}</b> 
+                  <ion-badge class="badge-tren" color="success" item-end>
+                      <ion-icon item-left name="checkmark-circle"></ion-icon>
                   </ion-badge> 
-                <ion-badge color="secondary" item-end>{{tren.countT}}
-                    <ion-icon item-left name="hammer"></ion-icon>
+                <ion-badge class="badge-tren" color="secondary" item-end>{{tren.countT}}
+                    <ion-icon  item-left name="hammer"></ion-icon>
                 </ion-badge>                                          
                 </button>
               </ion-item>                      
@@ -48,10 +55,4 @@
          <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite($event))">
           <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Yükleniyor"></ion-infinite-scroll-content>
         </ion-infinite-scroll>
-      </div>
   </ion-content>
-  <ion-footer no-border text-wrap>
-      <ion-toolbar text-center>
-        <ion-title>Tüm hakları DualSoft Yazılım ve Eğitim Hizmetleri LTD. ile saklıdır.</ion-title>
-      </ion-toolbar>
-    </ion-footer>

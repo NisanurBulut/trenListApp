@@ -2,13 +2,12 @@
   <ion-navbar>
     <ion-title>login</ion-title>
   </ion-navbar>
-
 </ion-header>
     <ion-content class="login-content" padding>
         <ion-row class="logo-row">
           <ion-col></ion-col>
           <ion-col width-67>
-            <img src="http://placehold.it/300x200"/>
+            <img src="assets/imgs/savroniklogo.png"/>
           </ion-col>
           <ion-col></ion-col>
         </ion-row>
@@ -37,7 +36,7 @@
             
                 <ion-row responsive-sm>
                   <ion-col>
-                    <button ion-button (click)="login(loginForm)" type="submit" block>Oturum Aç</button>
+                    <button ion-button (click)="login(loginForm)" class="submit-btn" type="submit" block>Oturum Aç</button>
                   </ion-col>
                   <!--
                   <ion-col>
@@ -48,9 +47,3 @@
               </form>
         </div>
       </ion-content>
-
-<ion-footer no-border>
-    <ion-toolbar text-center>
-      <ion-title >Tüm hakları DualSoft Yazılım ve Eğitim Hizmetleri LTD. ile saklıdır.</ion-title>
-    </ion-toolbar>
-  </ion-footer>

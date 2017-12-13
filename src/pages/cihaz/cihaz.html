@@ -1,9 +1,3 @@
-<!--
-  Generated template for the CihazPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar swipeBackEnabled="false">
     <button ion-button menuToggle>
@@ -13,25 +7,22 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding class="list-content">
-    <div class="list-item-content">
+    <span *ngIf="TrenData.countT==0">
+      <b>{{TrenData.TrenAd}} Trenine ait aktif cihaz bilgisi bulunmamaktadır.</b>
+         </span>
   <ion-list inset *ngFor="let tcihaz  of dataSetTCihaz">   
       <ion-item detail-none text-wrap> 
+        
           <button ion-item (click)="goToCihazDetail(tcihaz)">
               <ion-badge color="{{tcihaz.iconColor}}" item-start>
                   <ion-icon item-left name="{{tcihaz.iconString}}"></ion-icon>
               </ion-badge> 
               <b text-wrap >{{tcihaz.CAd}}</b>
-              <p text-wrap class="csv-date">Son Verilme Tarihi: {{tcihaz.CSonVeriTar | date: "dd/MM/yyyy H:mm"}}</p>
+              <p text-wrap class="csv-date">Son Veri Tarihi: {{tcihaz.CSonVeriTar | date: "dd/MM/yyyy H:mm"}}</p>
               <ion-thumbnail item-left>
                   <img src="assets/imgDevices/{{tcihaz.Cid}}.png">
                 </ion-thumbnail> 
             </button>
-            </ion-item>          
+            </ion-item>         
     </ion-list>
-    </div>
 </ion-content>
-<ion-footer no-border>
-    <ion-toolbar text-center text-wrap>
-      <ion-title>Tüm hakları DualSoft Yazılım ve Eğitim Hizmetleri LTD. ile saklıdır.</ion-title>
-    </ion-toolbar>
-  </ion-footer>

@@ -27,7 +27,7 @@ private role:string;
     public authService:AuthServiceProvider,
     public menu: MenuController,
     private netProvider:NetworkDetectProvider,
-    private currenUser:User) {  
+    private currenUser:User) {      
     this.menu.enable(false);
   }
   ionViewDidEnter() {
@@ -36,8 +36,9 @@ private role:string;
 
   login(form: NgForm) {
     this.submitted = true;
-    if (form.valid) {
+    if (form.valid) {     
       if(this.netProvider.getConnectionStatus()){
+        this.netProvider.presentSpinner();  
       var data = "username=" + this.userData.UserName + "&password="+this.userData.Password+"&grant_type=password";
       this.authService.postDataforLogin(data,"token").then((result) => {
         this.responseData=result;   
@@ -63,8 +64,9 @@ private role:string;
         setTimeout(() => 
         {
           this.navCtrl.setRoot(TrenPage);  
+          this.netProvider.dismissSpinner();
         },
-        1000);
+        500);
            
       }, (err) => {
        //Serverdan gelen hata serviste alert edilir

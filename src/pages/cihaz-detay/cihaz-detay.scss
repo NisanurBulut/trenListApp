@@ -3,5 +3,13 @@ page-cihaz-detay {
     {
         opacity: 0.4;
     }
-    .i-am-centered { margin: auto; max-width: 300px;}
+    .i-am-centered {  
+        width: 100px; //your image/element width here
+        height: 100px; //your image/element height here
+        overflow: auto;
+        margin: auto;
+        position: absolute;
+        top: 0; left: 0; bottom: 0; right: 0;
+        
+    }
 }

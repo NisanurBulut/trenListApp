@@ -5,21 +5,19 @@
       </ion-toolbar>
     </ion-header>
   
-    <ion-content>
-      <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
-          <ion-icon item-start [name]="p.icon" ></ion-icon>
-        </button>
-      </ion-list>
+    <ion-content class="list-content" >
+        <div>
+      <ion-list inset *ngFor="let p of pages">
+       
+            <button ion-item menuClose (click)="openPage(p)">
+                {{p.title}}
+                <ion-icon item-start [name]="p.icon"></ion-icon>
+              </button>
+       </ion-list>
+    </div>
     </ion-content>
   
   </ion-menu>
   
   <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
   <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
-  <ion-footer no-border text-wrap>
-      <ion-toolbar text-center>
-        <ion-title>Tüm hakları DualSoft Yazılım ve Eğitim Hizmetleri LTD. ile saklıdır.</ion-title>
-      </ion-toolbar>
-    </ion-footer>

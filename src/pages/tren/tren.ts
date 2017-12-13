@@ -28,7 +28,6 @@ export class TrenPage  {
       this.activeuser.sessionstime=new Date().toString();
       this.activeuser.name=this.user.getUserName();
       this.activeuser.role=this.user.getRole();
-      console.log(this.user.getRole());
       this.menu.enable(true);//menü aktif edilir          
       this.tlStart=0;
       this.netProvider.setConnectionStatus();
@@ -55,14 +54,11 @@ export class TrenPage  {
         } 
         else{         
           resolve(false); //scroll dursun       
-        }          
-          
+        }                    
       }, (err) => {
         this.netProvider.PrepareAlert(err); //sunucudan dönen  hatayı gösterelim
-              });   
-              
+              });                
     });
-
   }
 
   doInfinite(infiniteScroll:any): Promise<any> {

@@ -44,13 +44,9 @@ export class User {
         return this.isAuthenticated;
     }
     public setRole(_role:string){
-
-
         return new Promise((resolve, reject) => {    
-            console.log(_role);
             this.Role=_role;
-          });
-       
+          });      
     }
 public getRole():string
 {

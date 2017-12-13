@@ -1,8 +1,17 @@
 .list-content{
-    background:color($colors,appbackground);
+    background:color($colors,appitembackground);
 }
 .list-item-content{
     padding: 10px 10px 10px 10px;
     margin-top: 15px;
+    background:color($colors, appbackground);
+}
+.item-content{
     background:color($colors,appitembackground);
+}
+.badge-tren{
+    font-weight:bold;
+    font-size:1.4rem;
+    text-align: center;
+    position: relative;
 }

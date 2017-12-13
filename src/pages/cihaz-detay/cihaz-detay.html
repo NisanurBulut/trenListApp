@@ -1,51 +1,39 @@
-<!--
-  Generated template for the CihazDetayPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>{{datacihazd.CAd}}'in Detayları</ion-title>
+    <ion-title>{{datacihazd.CAd}}'nin Detayları</ion-title>
   </ion-navbar>
-
 </ion-header>
 <ion-content padding class="list-content">
-    <div class="list-item-content">
     <ion-list inset *ngFor="let cdetay  of dataSetCD">
-        <ion-item ion-item ion-thumbnail >   
-          <ion-grid>
-          <ion-row  class="i-am-centered" >
-              <ion-col width-100>
-                  <ion-thumbnail>
-                      <img style="width: 100px; height: 100px;" src="assets/imgDevices/{{datacihazd.Cid}}.png">
-                    </ion-thumbnail>  
-              </ion-col>
-
-            </ion-row>  
-            <ion-row>
-              <ion-col width-100>
-                  <ion-list width-100>
-                      
-                      <ion-item width-50 text-wrap>
-                          <ion-icon item-left name="pricetag"></ion-icon>
-                          {{cdetay.DetayStr}}
-                      </ion-item>
-                      <ion-item width-50 text-wrap>
-                          <ion-icon item-left name="pricetag"></ion-icon>
-                        <p >Son Verilme Tarihi: {{cdetay.DetayErisimSonTar | date: "dd/MM/yyyy H:mm"}}</p>
-                      </ion-item>
-                    </ion-list>
-              </ion-col>
-            </ion-row>
-          </ion-grid>      
+        <ion-item ion-thumbnail>        
+                  <ion-thumbnail >
+                      <img class="i-am-centered" src="assets/imgDevices/{{datacihazd.Cid}}.png">
+                    </ion-thumbnail>     
+        </ion-item> 
+        <ion-item text-wrap>
+            <ion-icon item-left name="pricetag"></ion-icon>
+            <b>Cihaz Açıklaması:</b><br/>
+            {{cdetay.DetayStr}}
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-icon item-left name="pricetag"></ion-icon>
+          <b>Son Erişim Tarihi:</b>
+          <p>{{cdetay.DetayErisimSonTar | date: "dd/MM/yyyy H:mm"}}</p>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-icon item-left name="pricetag"></ion-icon>
+          <b>Cihaz Sürüm:</b>
+          <p>{{cdetay.CSurum}}</p>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-icon item-left name="pricetag"></ion-icon>
+          <b>Yazılım Sürüm:</b><br/>
+          <p>{{cdetay.DSurum}}</p>
+        </ion-item>
+        <ion-item width-20 text-wrap>
+            <ion-icon item-left name="pricetag"></ion-icon>
+          <b>Donanım Sürüm:</b><br/>
+          <p>{{cdetay.YSurum}}</p>
         </ion-item>         
     </ion-list>
-    </div>
 </ion-content>
-<ion-footer no-border>
-    <ion-toolbar text-center text-wrap>
-      <ion-title>Tüm hakları DualSoft Yazılım ve Eğitim Hizmetleri LTD. ile saklıdır.</ion-title>
-    </ion-toolbar>
-  </ion-footer>

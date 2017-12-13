@@ -1,12 +1,16 @@
 page-tren {
- 
+    font-size: 62.5%;
     .spinner-container {
         width: 100%;
         text-align: center;
         padding: 10px;
     }
-
-    .ToastClass{
-        font-family: Helvetica
-    }
+    .btn{
+        width:100%; //bulunduğun alanı doldur
+        height:100px;
+        display: inline-block;
+        margin:0;
+        padding:5px;
+       
+      }
 }
