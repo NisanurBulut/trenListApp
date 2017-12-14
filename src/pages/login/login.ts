@@ -37,7 +37,7 @@ private role:string;
   login(form: NgForm) {
     this.submitted = true;
     if (form.valid) {     
-      if(this.netProvider.getConnectionStatus()){
+      if(this.netProvider.getConnectionStatus()){ //Bağlant kontrol et
         this.netProvider.presentSpinner();  
       var data = "username=" + this.userData.UserName + "&password="+this.userData.Password+"&grant_type=password";
       this.authService.postDataforLogin(data,"token").then((result) => {
@@ -55,7 +55,7 @@ private role:string;
            //Claim için rol bilgilerini isteyelim
       this.authService.getClaimsData(this.tokenData.access_token).then((result) => { 
         this.role=result[0].value;
-        console.log(this.role);
+       
         this.currenUser.setRole(this.role);
       }, (err) => {
           //Serverdan gelen hata serviste alert edilir
@@ -72,12 +72,15 @@ private role:string;
        //Serverdan gelen hata serviste alert edilir
       });  
     }
+    else
+    {
+      this.netProvider.displayNetworkUpdate("İnternet Bağlantısı Kayıp");
+    }
   }
    
   }
   logout(): void {
     return Observable.create(observer => {
-      console.log(this.currenUser.getRole());
       this.currenUser=undefined;
       localStorage.clear();//bu önemli
       this.netProvider.leaveNetworkSubscribe();

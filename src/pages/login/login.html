@@ -14,26 +14,22 @@
         <div class="login-box">
             <form #loginForm="ngForm" novalidate>
                 <ion-list no-lines>
-                  <ion-item>
-                   
-                    <ion-input [(ngModel)]="userData.UserName" placeholder="Kullanıcı Adı" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+                  <ion-item>                  
+                    <ion-input text-center [(ngModel)]="userData.UserName" placeholder="Kullanıcı Adı" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
                       required>
                     </ion-input>
                   </ion-item>
                   <p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
                     Kullanıcı Adı Gereklidir.
-                  </p>
-            
-                  <ion-item>
-                 
-                    <ion-input [(ngModel)]="userData.Password" placeholder="Parola" name="password" type="password" #password="ngModel" required>
+                  </p>           
+                  <ion-item>                 
+                    <ion-input text-center [(ngModel)]="userData.Password" placeholder="Parola" name="password" type="password" #password="ngModel" required>
                     </ion-input>
                   </ion-item>
                   <p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
                   Parola Gereklidir.
                   </p>
-                </ion-list>
-            
+                </ion-list>            
                 <ion-row responsive-sm>
                   <ion-col>
                     <button ion-button (click)="login(loginForm)" class="submit-btn" type="submit" block>Oturum Aç</button>

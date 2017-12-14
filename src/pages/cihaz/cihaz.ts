@@ -44,23 +44,31 @@ export class CihazPage {
   writable : true,
   enumerable : true,
   configurable : true});
+  Object.defineProperty(element, "stateString", {value : '',
+  writable : true,
+  enumerable : true,
+  configurable : true});
   switch (element.CDurum)
   {
      case 1:
-     element.iconString="md-checkmark"; 
+     element.iconString="checkmark-circle"; 
      element.iconColor="success";
+     element.stateString="Aktif Durumda";
      break;
      case 2:
-     element.iconString="md-construct"; 
+     element.iconString="construct"; 
      element.iconColor="energy";
+     element.stateString="Bakım Durumunda";
      break;
      case 3: 
-     element.iconString="md-warning"; 
+     element.iconString="warning"; 
      element.iconColor="danger";
+     element.stateString="Arızalı Durumda";
      break;
      default: 
-     element.iconString="md-bookmark";
+     element.iconString="bookmark";
      element.iconColor="blueprimary";
+     element.stateString="Durum Bilgisi Belirtilmemiş";
      break;
   }  
  });
@@ -79,6 +87,7 @@ export class CihazPage {
  }
  goToCihazDetail(tcihaz:any)
  {
+   console.log(tcihaz);
    if(this.netProvider.getConnectionStatus()){ //Detay Sayfasına Gitmeden evvel kontrol ediyoruz
     //Tren sayfasından gelen detayları listelenecel olan
     setTimeout(() => 
@@ -89,5 +98,6 @@ export class CihazPage {
    
   }
  }
+
  }
  

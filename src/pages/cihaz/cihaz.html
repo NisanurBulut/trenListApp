@@ -11,17 +11,19 @@
       <b>{{TrenData.TrenAd}} Trenine ait aktif cihaz bilgisi bulunmamaktadır.</b>
          </span>
   <ion-list inset *ngFor="let tcihaz  of dataSetTCihaz">   
-      <ion-item detail-none text-wrap> 
-        
-          <button ion-item (click)="goToCihazDetail(tcihaz)">
+        <ion-item ion-thumbnail>        
+                <ion-thumbnail >
+                    <img class="i-am-centered" src="assets/imgDevices/{{tcihaz.Cid}}.png">
+                  </ion-thumbnail>     
+      </ion-item> 
+      <ion-item detail-none text-wrap (click)="goToCihazDetail(tcihaz)">         
+          <button ion-item>
               <ion-badge color="{{tcihaz.iconColor}}" item-start>
                   <ion-icon item-left name="{{tcihaz.iconString}}"></ion-icon>
               </ion-badge> 
               <b text-wrap >{{tcihaz.CAd}}</b>
               <p text-wrap class="csv-date">Son Veri Tarihi: {{tcihaz.CSonVeriTar | date: "dd/MM/yyyy H:mm"}}</p>
-              <ion-thumbnail item-left>
-                  <img src="assets/imgDevices/{{tcihaz.Cid}}.png">
-                </ion-thumbnail> 
+        
             </button>
             </ion-item>         
     </ion-list>

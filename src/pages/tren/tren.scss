@@ -5,12 +5,17 @@ page-tren {
         text-align: center;
         padding: 10px;
     }
-    .btn{
+    .btns-header{
         width:100%; //bulunduğun alanı doldur
-        height:100px;
+        height:200px;
         display: inline-block;
         margin:0;
-        padding:5px;
        
       }
+      .badge-tren{
+        font-weight:bold;
+        font-size:1.4rem;
+        text-align: center;
+        position: relative;
+    }
 }

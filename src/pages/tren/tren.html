@@ -9,21 +9,21 @@
       <ion-grid>
         <ion-row>
           <ion-col ion-button >
-              <button class="btn" icon-only color="secondary">
+              <button class="btns-header" icon-only color="secondary">
                   <ion-icon name="md-contact"></ion-icon>
                 <br/>
                    {{activeuser.name}}        
                 </button>  
           </ion-col>
           <ion-col ion-button>
-              <button class="btn" icon-only text-wrap color="secondary">
+              <button class="btns-header" icon-only text-wrap color="secondary">
                   <ion-icon name="flag"></ion-icon>
                   <br/>
                 {{activeuser.role}}
                 </button>
           </ion-col>
           <ion-col ion-button> 
-              <button class="btn" icon-only text-wrap color="secondary">
+              <button class="btns-header" icon-only text-wrap color="secondary">
                   <ion-icon name="clock"></ion-icon>
                   <br/>
                 {{activeuser.sessionstime | date: 'dd/MM/yyyy HH:MM'}}
@@ -39,17 +39,18 @@
   </ion-header>
   <ion-content padding class="list-content">
          <ion-list inset *ngFor="let tren  of dataSetTrenL | searchTren: term">
-            <ion-item detail-none>
-            <button ion-item (click)="goToTrenDetail(tren)">           
+            <ion-item detail-none  (click)="goToTrenDetail(tren)">
+          
+                <ion-label text-wrap><b>{{tren.TrenAd}}</b></ion-label>         
                 <ion-icon name="train" style="zoom:1.5;" item-start></ion-icon>              
-                 <b>{{tren.TrenAd}}</b> 
-                  <ion-badge class="badge-tren" color="success" item-end>
+                
+                  <ion-badge color="success" item-end>
                       <ion-icon item-left name="checkmark-circle"></ion-icon>
                   </ion-badge> 
-                <ion-badge class="badge-tren" color="secondary" item-end>{{tren.countT}}
+                <ion-badge color="secondary" item-end>{{tren.countT}}
                     <ion-icon  item-left name="hammer"></ion-icon>
                 </ion-badge>                                          
-                </button>
+               
               </ion-item>                      
          </ion-list>
          <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite($event))">

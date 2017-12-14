@@ -35,5 +35,5 @@ export class CihazDetayPage {
       });
       this.netProvider.dismissSpinner();
   }
- 
+
 }

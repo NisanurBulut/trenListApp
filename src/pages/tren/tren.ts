@@ -99,4 +99,5 @@ export class TrenPage  {
   ionViewWillLeave(){
     this.netProvider.leaveNetworkSubscribe();//View den ayrılırken boşver 
     }
+
 }

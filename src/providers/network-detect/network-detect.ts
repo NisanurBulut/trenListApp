@@ -4,8 +4,7 @@ import { AlertController,ToastController,LoadingController} from 'ionic-angular'
 import { HttpClient,HttpResponse } from '@angular/common/http';
 import { Subscription} from 'rxjs/Subscription';
 import { Loading } from 'ionic-angular/components/loading/loading';
-//import { Observable } from 'rxjs/Observable';
-
+import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class NetworkDetectProvider { 
   private connected: Subscription;
@@ -31,7 +30,6 @@ export class NetworkDetectProvider {
     
   }
    displayNetworkUpdate(_message:string){
-    let networkType = this.network.type;
     this.toast.create({
       message: _message,
       duration: 3000
@@ -55,6 +53,7 @@ export class NetworkDetectProvider {
    getConnectionStatus():boolean{  //Bunu fonksiyonlar için kullanıyorum
      return this.status;
    }
+
     leaveNetworkSubscribe():void{
     this.connected.unsubscribe();
     this.disconnected.unsubscribe();
