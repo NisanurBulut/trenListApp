@@ -62,7 +62,6 @@ export class NetworkDetectProvider {
     console.log(err);
 switch(err["status"])
 {
-
 case 0:
 this.ShowAlert("Kullanıcı Hatası","Bilgilerinizin Doğruluğundan Emin Olunuz.");
 break;
