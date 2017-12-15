@@ -59,8 +59,10 @@ export class NetworkDetectProvider {
   }
    PrepareAlert(err:Response)
   {
+    console.log(err);
 switch(err["status"])
 {
+
 case 0:
 this.ShowAlert("Kullanıcı Hatası","Bilgilerinizin Doğruluğundan Emin Olunuz.");
 break;
@@ -72,7 +74,7 @@ case 401:
 this.ShowAlert("Erişim Sınırlaması","Bu Alana Erişim İzniniz Bulunmamaktadır.");
 break;
 case 500:
-this.ShowAlert("Adres Hatası","İstenen Veri yolu Bulunamadı");
+this.ShowAlert("Kullanıcı Hatası","Bilgilerinizin Doğruluğundan Emin Olunuz.");
 break;
 case 403:
 this.ShowAlert("Erişim Sınırlaması","Bu Alana Erişim İzniniz Bulunmamaktadır.");

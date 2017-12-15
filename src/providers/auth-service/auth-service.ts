@@ -22,7 +22,7 @@ private currentUser:User) {
           resolve(JSON.stringify(res));         
         }, (err) => {
           console.log(err);
-          this.netProvider.ShowAlert(err.name, err.message);  
+          this.netProvider.PrepareAlert(err);  
           reject(err);
         });
     });
@@ -61,7 +61,7 @@ private currentUser:User) {
       .subscribe(data => {       
           resolve(data);       
         }, (err) => {
-          console.log(err);
+          
           this.netProvider.PrepareAlert(err);    
           reject(err);
         });
