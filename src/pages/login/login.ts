@@ -70,6 +70,12 @@ private role:string;
            
       }, (err) => {
        //Serverdan gelen hata serviste alert edilir
+       this.netProvider.dismissSpinner();
+       //Hata sonrası başlatılan spinner kapatılmalı.
+       //Burada başka bir alert çıkarmalıyım
+       //parola ya da kullanıcı adı hatalıdır
+       //this.netProvider.ShowAlert("Kullanıcı Hatası","Kullanıcı adı ya da şifre bilgisi hatalıdır.");
+       this.navCtrl.setRoot(this.navCtrl.getActive().component);
       });  
     }
     else

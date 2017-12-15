@@ -41,7 +41,7 @@ private currentUser:User) {
           resolve(JSON.stringify(res));                          
         }, (err) => {   
         console.log(err);
-          this.netProvider.ShowAlert(err.name, err.message);    
+          this.netProvider.PrepareAlert(err);    
           reject(err);
         });
     });

@@ -4,7 +4,6 @@ import { AlertController,ToastController,LoadingController} from 'ionic-angular'
 import { HttpClient,HttpResponse } from '@angular/common/http';
 import { Subscription} from 'rxjs/Subscription';
 import { Loading } from 'ionic-angular/components/loading/loading';
-import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class NetworkDetectProvider { 
   private connected: Subscription;
@@ -62,6 +61,9 @@ export class NetworkDetectProvider {
   {
 switch(err["status"])
 {
+case 0:
+this.ShowAlert("Kullanıcı Hatası","Bilgilerinizin Doğruluğundan Emin Olunuz.");
+break;
 case 400:
 this.ShowAlert("İstek Hatası","Uygulama Ön Belleğini Temizleyip Tekrar Deneyiniz.");
 //this.navCtrl.setRoot('LoginPage');
@@ -80,7 +82,7 @@ this.ShowAlert("Kayıp Adres","Erişmeye Çalıştığınız Alan Bulunamadı.")
 //this.navCtrl.setRoot('LoginPage');
 break;
 default:
-this.ShowAlert(err["name"],err["message"]);
+//this.ShowAlert(err["name"],err["message"]);
 break;
 }
    }

@@ -24,10 +24,8 @@ export class CihazPage {
     if(this.netProvider.getConnectionStatus()){ //Sayfaya cihazlar yüklenmeden evvel network bağlantısı kontrol edilir
     this.getCihazList(this.TrenData);
   }
-  
    }
    ionViewDidEnter() {
-
     this.netProvider.CheckConnection();
   }
    public setdtcihazList(dataset:any)
@@ -75,19 +73,16 @@ export class CihazPage {
    }
  getCihazList(_trenData:any)
  { 
-   this.netProvider.presentSpinner(); 
+   this.netProvider.presentSpinner(); //Cihaz Yüklenirken
  this.trencdservice.getCihazList(_trenData, 'ListCihaz')
- .then((result) => {
-  
+ .then((result) => { 
    this.setdtcihazList(result);
-   this.netProvider.dismissSpinner();
+   this.netProvider.dismissSpinner();//Cihaz Yüklemesi Bitince
  }, (err) => {
- 
  });
  }
  goToCihazDetail(tcihaz:any)
  {
-   console.log(tcihaz);
    if(this.netProvider.getConnectionStatus()){ //Detay Sayfasına Gitmeden evvel kontrol ediyoruz
     //Tren sayfasından gelen detayları listelenecel olan
     setTimeout(() => 
